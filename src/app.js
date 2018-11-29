@@ -30,7 +30,7 @@ app.use(session({
 app.use('/', express.static('./public'))
 app.use('/api', api)
 
-app.listen(8081, () => {
+app.listen(80, () => {
     console.log('Server OK');
 })
 
