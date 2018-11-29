@@ -1,18 +1,39 @@
+const TMP={
+  No:0,
+  time:"",
+  status:false,
+  pin:"",
+  bookTime:"",
+  startCanEnter:"",endCanEnter:""
+}
 new Vue({
   el: "#vue-app",
   data: {
     building: ["A", "B", "C"],
     buildingSelected: "",
     queue: [
-      { No: 1, time: 1541653407173, status: false, pin: "1236" },
-      { No: 2, time: 1541653690916, status: false, pin: "8125" },
-      { No: 3, time: 1541654062282, status: false, pin: "5565" }
+      { No: 1, time: "21:21", status: false, pin: "1236" ,bookTime: "22:00",startCanEnter:"22.10",endCanEnter:"5:14"},
+      { No: 2, time: "22.05", status: false, pin: "8125" ,bookTime: "00:00"},
+      { No: 3, time: "21.29", status: false, pin: "5565" ,bookTime: "00:00"}
     ],
     // selectedQueue:{ No: 0, time: 0 ,status:false},
     // selectedIndex:-1,
     selectedPin: "",
     timeCurrent: "15:20",
-    timeBooking:0
+    dataSet:{
+      No:1,
+      time:"08:10",
+      status:false,
+      pin:"1222",
+      bookTime:"08:20",
+      startCanEnter:"",
+      endCanEnter:""
+    },
+    dataSetList:[
+      { No: 1, time: "9:21", status: false, pin: "1236" ,bookTime: "00:00",startCanEnter:"",endCanEnter:""},
+      { No: 2, time: "8:50", status: false, pin: "8125" ,bookTime: "00:00",startCanEnter:"",endCanEnter:""},
+      { No: 3, time: "10:00", status: false, pin: "5565" ,bookTime: "00:00",startCanEnter:"",endCanEnter:""}
+    ]
   },
   methods: {
     setCenter: function(id) {
@@ -32,21 +53,60 @@ new Vue({
       }
       // console.log(center);
     },
+    sentBuilding:function(){
+      var myObj = {
+        building:this.buildingSelected
+      };
+      console.log(myObj);
+      // axios.post('/yay', myObj).then(res => {
+          
+      //   console.log(res.data)
+        this.dataSetList=res.data.data
+        setTimeout(() => {
+          this.changeDataList()
+          console.log("open");
+        }, 100);
+      // });
+    },
+    changeDataList:function(){
+      var i
+      for ( i = 0; i < this.dataSetList.length; i++) {
+        let cloned = JSON.parse(JSON.stringify(TMP));
+        cloned.No=this.dataSetList[i].No
+        cloned.time=this.dataSetList[i].time
+        cloned.status=false
+        this.queue.push(cloned)
+      }
+    },
     openform: function(key) {
       // this.selectedIndex=key
-      this.queue[key].status = true;
-      this.selectedPin = this.queue[key].pin;
-      var modal = document.getElementById("myModal");
-      modal.style.display = "block";
-      console.log("open");
+      var myObj = {
+        time:this.timeCurrent
+      };
+      console.log(myObj);
+      // axios.post('/yay', myObj).then(res => {
+          
+      //   console.log(res.data)
+        this.dataSet=res.data.data
+        setTimeout(() => {
+          this.queue[key].pin=this.dataSet.pin
+          this.queue[key].startCanEnter=this.dataSet.startCanEnter
+          this.queue[key].endCanEnter=this.dataSet.endCanEnter
+          this.queue[key].status = true;
+          this.selectedPin = this.queue[key].pin;
+          var modal = document.getElementById("myModal");
+          modal.style.display = "block";
+          console.log("open");
+        }, 100);
+      // });
+      // this.selectedCus=this.CusEmpty
+      // console.log(this.selectedCus);
+      
+      
     },
     closeform: function() {
       var modal = document.getElementById("myModal");
       modal.style.display = "none";
-    },
-    clear: function() {
-      this.buildingSelected = "";
-      this.amount = 0;
     },
     requestDetail: function() {
       var myObj = {
@@ -60,7 +120,7 @@ new Vue({
     },
     checkTime: function(i) {
       if (i < 10) {
-        i = "0" + i;
+        i = "" + i;
       } // add zero in front of numbers < 10
       return i;
     },
@@ -71,23 +131,56 @@ new Vue({
       var s = today.getSeconds();
       m = this.checkTime(m);
       s = this.checkTime(s);
-      //   document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
+      document.getElementById("txt").innerHTML = h + ":" + m + ":" + s;
       var t = setTimeout(startTime, 500);
       this.timeCurrent = h + ":" + m;
+      console.log(new Date());
+      
+      // return new Date()
     },
     reduceTime: function(key) {
-      return Math.floor(
-        (this.queue[key].time + 1000 * 60 * 110 - Date.now()) / (60 * 1000)
-      );
+
+      // document.getElementById('playtime').innerHTML=(this.queue[key].time + 1000 * 60 * 1 - this.startTime()) / (60 * 1000)
+      return this.queue[key].time-this.timeCurrent
+      // Math.floor(
+      //   (this.queue[key].time + 1000 * 60 * 1 - new Date()) / (60 * 1000)
+      // );
     },
     setTime: function() {
 
       this.queue[0].time = Date.now()+(1000*60*2);
       this.queue[1].time = Date.now()+(1000*60*1);
       this.queue[2].time = Date.now()+(1000*60*0);
+    },
+    countDown10min:function(key){
+      if(this.reduceTime==-10){
+        this.queue.status=false
+      }
     }
   },
   mounted() {
+    // this.setTime()
+    setInterval(() => {
+      // this.timeC.substring(7,12)=this.timeCurrent
+      var t = document
+        .getElementById("txt")
+        .innerHTML.split(':');
+      this.timeCurrent=t[0]+":"+t[1]
+      console.log(this.timeCurrent);
+      for (let i = 0; i < this.queue.length; i++) {
+        if(this.queue[i].status==true&&this.queue[i].endCanEnter!==""&&this.queue[i].endCanEnter<=this.timeCurrent){
+            this.queue[i].status=false
+            this.queue[i].endCanEnter=""
+            this.queue[i].bookTime=""
+            this.queue[i].startCanEnter=""
+        }
+        if(this.queue[i].time<this.timeCurrent){
+          this.queue[i].time=""
+        }
+        
+      }
+    }, 100);
+
     var x, i, j, selElmnt, a, b, c;
 
     /*look for any elements with the class "custom-select":*/
@@ -181,3 +274,19 @@ then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
   }
 });
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  self.timeCurrent = h + ":" + m;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "" + i};  // add zero in front of numbers < 10
+  return i;
+}

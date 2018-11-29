@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>home</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link rel="stylesheet" href="home.css"> </head>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <body>
+    <div class="bt_a"><a href="login.html">log in</a></div>
+    <header>
+        <h1><img src="pic/logo.png" style="max-width:220px; width:auto; height:auto;"></h1>
+    </header>
+    <div class="container" id="home">
+      <div class="gallery w3-container">
+
+        <img id="pic1" src="pic/pic1.png" v-on:click="zoom('modal01')" class="picedge">
+
+        <img id="pic3" src="pic/pic3.png" v-on:click="zoom('modal03')" class="picinside">
+
+        <img id="pic2" src="pic/pic2.png" v-on:click="zoom('modal02')" class="picmiddle">
+
+        <img id="pic4" src="pic/pic4.png" v-on:click="zoom('modal04')" class="picinside">
+
+        <img id="pic5" src="pic/pic5.png" v-on:click="zoom('modal05')" class="picedge">
+
+        
+        <!-- The Modal -->
+          <div id ="modal01"class="w3-modal" v-on:click="this.style.display='none'">
+              <div class="w3-modal-content w3-animate-zoom">
+                  <img src="pic/img1.jpg" style="width:100%">
+            </div>
+          </div>
+
+          <div id ="modal02"class="w3-modal" v-on:click="this.style.display='none'">
+              <div class="w3-modal-content w3-animate-zoom">
+                  <img src="pic/img2.jpg" style="width:100%">
+            </div>
+          </div>
+
+          <div id ="modal03"class="w3-modal" v-on:click="this.style.display='none'">
+              <div class="w3-modal-content w3-animate-zoom">
+                  <img src="pic/img3.jpg" style="width:100%">
+            </div>
+          </div>
+
+          <div id ="modal04"class="w3-modal" v-on:click="this.style.display='none'">
+              <div class="w3-modal-content w3-animate-zoom">
+                  <img src="pic/img4.jpg" style="width:100%">
+            </div>
+          </div>
+
+          <div id ="modal05"class="w3-modal" v-on:click="this.style.display='none'">
+              <div class="w3-modal-content w3-animate-zoom">
+                  <img src="pic/img5.jpg" style="width:100%">
+            </div>
+          </div>
+        </div>
+        <!-- <div id="pic2Modal" class="modal">
+          <img class="modal-content" id="img02">
+        </div>
+
+        <div id="pic3Modal" class="modal">
+          <img class="modal-content" id="img03">
+        </div>
+
+        <div id="pic4Modal" class="modal">
+          <img class="modal-content" id="img04">
+        </div>
+
+        <div id="pic5Modal" class="modal">
+          <img class="modal-content" id="img05">
+        </div> -->
+    
+      
+
+      <div class="area">
+        <p>หอพัก Dormitory เปิดให้เช่าทั้งแบบรายเดือนและรายวัน ใกล้สถานศึกษาและสถานที่สำคัญหลายแห่ง</p>
+      </div>
+
+      <!-- <nav> -->
+          <ul class="sticky" style="display:flex; flex:1;">
+              <li style="flex:1;"><a v-on:click="scroll('dormInfo')"><p> ข้อมูลหอพัก </p></a></li>
+              <li style="flex:1;"><a v-on:click="scroll('facility')"><p> ความสะดวก </p></a></li>
+              <li style="flex:1;"><a v-on:click="scroll('travel')"><p> การเดินทาง </p></a></li>
+              <li style="flex:1;"><a v-on:click="scroll('location')"><p> ที่ตั้ง </p></a></li>
+              <li style="flex:1;"><a v-on:click="scroll('contack')"><p> ติดต่อเรา </p></a></li>
+            </ul>
+      <!-- </nav> -->
+      <div id="dormInfo"></div>
+
+      <div class="bar" style="margin-top: 70px;">
+        <p>
+          <hr size="3" color="#E9AC87" style="float: left;">
+          <hr size="3" color="#E9AC87" style="float: right;">
+          <div class="rectangle"> ข้อมูลหอพัก </div>
+        </p>
+      </div>
+      <div class="whiteArea">
+        <p>ห อ พั ก ร า ย เ ดื อ น</p>
+        <p>ค่าเช่า 5,000 บาทต่อเดือน ไม่รวมค่าไฟฟ้าและค่าน้ำ</p>
+        <p>ค่าไฟฟ้า หน่วยละ 8 บาท ค่าน้ำ หน่วยละ 18 บาท</p><br>
+        <p>ห อ พั ก ร า ย วั น</p>
+        <p>ค่าบริการ 600 บาทต่อ 1 คืน รวมค่าไฟฟ้าและค่าน้ำ </p><br>
+        <p>ห้องพักขนาด 14 ตารางเมตร มีห้องน้ำในตัว แบ่งเป็น 2 แบบ</p>
+        <p>เตียงเดี่ยว ขนาด 5 ฟุต และ เตียงคู่ ขนาด 3.5 ฟุต</p>
+      </div>
+      <div id="facility"></div>
+
+      <div class="bar" style="margin-top: 70px;">
+        <p>
+          <hr width="38%" size="3" color="#E9AC87" style="float: left;">
+          <hr width="38%" size="3" color="#E9AC87" style="float: right;">
+          <div class="rectangle"> ความสะดวก </div>
+        </p>
+      </div>
+      <div class="whiteArea">
+        <p>โต๊ะเขียนหนังสือพร้อมเก้าอี้ | ชั้นเก็บของบิวด์อิน | ตู้เสื้อผ้า | ตู้รองเท้า</p>
+        <p>แอร์ | เครื่องทำน้ำอุ่น | Free Wi-Fi ห้องละ 2 account</p>
+        <p>บริการทำความสะอาดห้องพัก เดือนละ 1 ครั้ง</p>
+      </div>
+      <div id="travel"></div>
+
+      <div class="bar" style="margin-top: 70px;" >
+        <p>
+          <hr width="38%" size="3" color="#E9AC87" style="float: left;">
+          <hr width="38%" size="3" color="#E9AC87" style="float: right;">
+          <div class="rectangle"> การเดินทาง </div>
+        </p>
+      </div>
+      <div class="whiteArea">
+        <p>ร ถ ไ ฟ </p>
+        <p>นั่งรถไฟมาลงที่สถานีพระจอมเกล้า จากนั้นนั่งวินมาลงที่ Dormitory</p><br>
+        <p> ร ถ ไ ฟ ฟ้ า</p>
+        <p>ขึ้นรถไฟฟ้าหรือแอร์พอร์ตลิงค์มาลงที่สถานีลาดกระบัง</p>
+        <p>แล้วนั่งรถสองแถวมาลงที่ สถาบันเทคโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+        <p>และนั่งวินมาลงที่ Dormitory</p>
+      </div>
+      <div id="location"></div>
+
+      <div class="bar" style="margin-top: 70px;" >
+        <p>
+          <hr width="38%" size="3" color="#E9AC87" style="float: left;">
+          <hr width="38%" size="3" color="#E9AC87" style="float: right;">
+          <div class="rectangle"> ที่ตั้ง </div>
+        </p>
+      </div>
+      <div class="whiteArea">
+        <p>XXX ฉลองกรุง 1 ลาดกระบัง เขตลาดกระบัง กรุงเทพมหานครฯ 10520</p>
+      </div>
+      <img src="pic/map.png" class="mapcenter">
+      <div id="contack"></div>
+
+      <div class="bar" style="margin-top: 70px;" >
+        <p>
+          <hr width="38%" size="3" color="#E9AC87" style="float: left;">
+          <hr width="38%" size="3" color="#E9AC87" style="float: right;">
+          <div class="rectangle"> ติดต่อเรา </div>
+        </p>
+      </div>
+      <div class="whiteArea">
+        <p>Call 02xxxxxxxx หรือ 08xxxxxxxx</p>
+        <p>Line ID : @Xxxxxxx</p>
+      </div>
+
+    </div>
+    <script src="home.js" charset="utf-8"></script>
+  </body>
+
+</html>

@@ -1,7 +1,7 @@
 new Vue({
   el: "#vue-app",
   data: {
-    brand: ["คริสตัล", "เนสท์เล่", "ช้าง", "สิงห์", "มิเนเร่", "น้ำทิพย์"],
+    brand: ["crystal", "nestlepurelife", "Chang", "Singa", "Minere", "Thip"],
     brandSelected: "",
     amount: 0
   },
@@ -52,9 +52,9 @@ new Vue({
         amount: this.amount
       };
       console.log(myObj);
-      // axios.post('/yay', myObj).then(res => {
-      //   console.log(res.data)
-      // });
+      axios.post('/api/notify/buywater/', myObj).then(res => {
+        console.log(res.data);
+      });
     }
   },
   mounted() {

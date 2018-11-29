@@ -17,6 +17,22 @@ const getAll = (req, res) => {
 
 }
 
+const getByRoom = (req,res) => {
+    db.query('SELECT * FROM obj WHERE room = ?',[req.session.user.roomnum], (err,data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({
+                success: false
+            })
+        } else {
+            res.json({
+                success: true,
+                data
+            })
+        }
+    })
+}
+
 // const editObj = (req,res) => {
 //     const { building,roomnumber} = req.body
 
@@ -75,5 +91,6 @@ const addObj = (req,res) => {
 
 export default{
     getAll,
-    addObj
+    addObj,
+    getByRoom
 }

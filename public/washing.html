@@ -24,8 +24,8 @@
     />
   </head>
 
-  <body>
-    <div id="vue-app">
+  <body onload="startTime()">
+    <div id="vue-app" >
       <div class="container" id="CustomerData">
         <header>
           <div class="bt_a"><a href="login.html">log out</a></div>
@@ -52,9 +52,10 @@
         <div class="section">
           <div id="top">
             <h1>เครื่องซักผ้า</h1>
+            <div id="txt"></div>
             <hr />
             <div class="custom-select">
-              <select>
+              <select v-on:change="sentBuilding()">
                 <option selected disabled hidden>กรุณาเลือกอาคาร</option>
                 <option v-for="(b,key,index) in building">{{ b }}</option>
               </select>
@@ -65,7 +66,7 @@
                 <thead>
                   <tr>
                     <th><p>เครื่อง</p></th>
-                    <th><p>เวลาที่เหลือ(นาที)</p></th>
+                    <th><p>เวลาที่ซักเสร็จ</p></th>
                     <th><p>คิว</p></th>
                   </tr>
                 </thead>
@@ -73,7 +74,9 @@
                 <tbody>
                   <tr v-for="(q,key,index) in queue">
                     <td>{{ q.No }}</td>
-                    <td>{{ reduceTime(key) }}</td>
+                    <td v-if="q.time!=='0'">{{ q.time }} </td>
+                    <td v-else>ว่าง</td>  
+                    <!-- {{ reduceTime(key) }} -->
                     <td v-if="q.status==false">
                       <div class="bt"><button type="button" v-on:click="openform(key)">จอง</button></div>
                     </td>

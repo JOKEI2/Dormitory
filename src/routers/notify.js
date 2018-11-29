@@ -17,9 +17,11 @@ route.post('/waterdt',notify.waterdt)
 route.post('/airredt',notify.airredt)
 route.post('/otherdt',notify.otherdt)
 route.post('/getTime',notify.getTime)
-route.post('/getWaterlist',notify.getTime)
+route.post('/getWaterlist',notify.getWaterlist)
 route.post('/show_list',notify.show_list)
 route.post('/buywater',notify.buywater)
 route.post('/annoy',notify.annoy)
+route.post('/washing',notify.washing)
+route.post('/postbox',notify.postbox)
 
 export default route

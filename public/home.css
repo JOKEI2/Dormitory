@@ -1,0 +1,397 @@
+*{
+    margin:0 auto;
+    padding: 0;
+  }
+
+  body{
+    background-image: url("pic/bg.png");
+    padding-bottom: 50px;
+  }
+  
+  header{
+    text-align: center;
+    padding-top: 15px;
+  }
+  
+  /* .center {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+} */
+
+    .picedge{
+        max-width:200px; 
+        max-height:200px; 
+        width:auto; 
+        height:auto; 
+        margin-top:150px;
+        flex:1;
+    }
+
+    .picinside{
+        max-width:250px; 
+        max-height:250px; 
+        width:auto; 
+        height:auto; 
+        margin-top:100px;
+        flex:1;
+    }
+
+    .picmiddle{
+        max-width:330px; 
+        max-height:330px;
+        width:auto; 
+        height:auto; 
+        margin-top:30px;
+        flex:1;
+    }
+  .mapcenter{
+      display: block;
+      width: 85%;
+      margin-top: 20px;
+      border-style: solid;
+      border-color: #EE999E;
+      border-width: 3px;
+  }
+  .bt_a a{
+    text-decoration: none;
+    color:#EE999E;
+    border: none;
+    /* z-index: 9; */
+  }
+  .bt_a {
+    font-family: Nithan;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 9;
+    float: right;
+    margin-right: 10px;
+    border: none;
+    position: absolute;
+    right: 0;
+  }
+  .bt_a :hover{
+    text-decoration: underline;
+    color:#DA6970;
+    border: none;
+  }
+
+  .bt{
+    margin-bottom: 20px;
+}
+.bt button {
+  margin: 0px 5px;
+  padding: 5px 20px;
+  background: #ee999e;
+  color: white;
+  font-family: Nithan;
+  font-size: 22pt;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.bt :hover {
+  background: #da6970;
+}
+
+  /* end of empty page with header */
+  .container{
+      width: 90%;
+      padding-bottom: 100px;
+      text-align: center;
+      margin-top: 25px;
+      border-style: solid;
+      border-color: #E9AC87;
+      border-width: 3px;
+      font-family: Nithan;
+  } 
+  .gallery{
+    width: 90%;
+    display:flex; 
+    flex:1;
+    /* height: 400px; */
+    margin-top: 20px;
+    /* background: #f1f1f1; */
+  }
+  .bar {
+    width: 90%;
+  }
+
+  hr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    background: #E9AC87;
+    padding: 1px;
+    width: 38%;
+    /* margin-top: 0px; */
+    /* border-width: 1px; */
+}
+  .rectangle{
+    height: 30px;
+    width: 20%;
+    font-family: Nithan;
+    color: white;
+    font-size: 18pt;
+    font-weight: bold;
+    background-color: #EEC7AF;
+  }
+  .whiteArea{
+    width: 85%;
+    background: white;
+    color: grey;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-size: 16pt;
+    font-weight: bold;
+  }
+
+  .area{
+    width: 55%;
+    background: white;
+    color: grey;
+    margin-top: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+.gallery img {
+    /* border-radius: 5px; */
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 25px; /* Location of the box */
+    /* padding-bottom: 50px; */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    /* background-color: rgb(0, 0, 1);  */
+    /* Fallback color */
+    /* background-color: rgba(0, 0, 0, 1);  */
+    /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 100%;
+    /* background-color: grey; */
+    /* max-width: 500px; */
+}
+.modal-body {
+    display: block;
+    /* padding: 0px 0px; */
+    /* background-color: grey; */
+    /* margin-left: 50%;
+    margin-right: 50%; */
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+/* @media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+
+} */
+
+
+header{
+    text-align: center;
+    padding-top: 15px;
+  }
+  
+  ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #EFC8B0;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+
+}
+
+.sticky{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+li {
+    float: left;
+    font-size:24pt;
+    font-weight: bold;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+}
+
+li a:hover {
+    display: flex;
+    flex: 1;
+    background-color: #EE999E;
+    text-align: center;
+}
+
+.active {
+    background-color: grey;
+    display: flex;
+    flex: 1;
+    text-align: center;
+}
+  
+
+  .section{
+    text-align: center;
+    width:1200px;
+    height:898px;
+    margin-top: 80px;
+    /* background: white;
+    border-style: solid;
+    border-color: #E9AC87;
+    border-width: 3px; */
+  }
+
+  @media(max-width: 415px){
+    .gallery{
+        width: 100%;
+        display: block; 
+        flex:none;
+    }
+    body{
+        padding-bottom: 20px;
+    }
+    .container{
+        width: 90%;
+        padding-bottom: 20px;
+    } 
+    .picedge{
+        max-width:80px; 
+        max-height:80px; 
+        flex: none;
+        margin-top:0px;
+    }
+
+    .picinside{
+        max-width:80px; 
+        max-height:80px; 
+        /* margin-top:none; */
+        flex: none;
+        margin-top:0px;
+    }
+
+    .picmiddle{
+        max-width:80px; 
+        max-height:80px;
+        margin-top: 0px;
+        margin-left: 0px;
+        flex: none;
+    }
+
+    .area{
+        width: 90%;
+        font-size: 12pt;
+      }
+
+      li a p{
+        font-size: 12pt;
+    }
+    .bar{
+        margin-top: 20px !important; 
+    }
+    .whiteArea{
+        padding: 0px;
+        font-size: 11pt;
+        /* background: #bbb */
+    }
+    .rectangle{
+        width: 40%;
+        font-size: 14pt;
+    }
+    hr{
+        width:25%;
+    }
+
+    #dormInfo{
+        padding-bottom: 20px;
+    }
+
+    #facility{
+        padding-bottom: 20px;
+    }
+
+    #travel{
+        padding-bottom: 20px;
+    }
+
+
+    #location{
+        padding-bottom: 20px;
+        /* padding-top: 100px; */
+    }
+
+    #contack{
+        padding-bottom: 20px;
+        /* padding-top: 100px; */
+    }
+
+}
+  
+  /* Font */
+  @font-face {
+      font-family: Nithan;
+      src: url(font/Nithan.ttf);
+  }
+  

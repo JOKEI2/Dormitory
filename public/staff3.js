@@ -1,30 +1,67 @@
+const TMP={
+  building:'',
+  room:'',
+  brand:'',
+  amount:0,
+}
 new Vue({
   el:'#vue-app',
   data:{
     dateSelected:'',
     list:[
-      {
-    //     building:'A',
-    //     room:'101',
-    //     brand:'เพอร์ร่า',
-    //     amount:2,
-      },
+      // {
+      //   building:'A',
+      //   room:'101',
+      //   brand:'เพอร์ร่า',
+      //   amount:2,
+      // },
     ],
+    dataSet:[
+      {
+        build:'A',
+        room:'101',
+        brand:'เพอร์ร่า',
+        amount:2,
+      },
+      {
+        build:'A',
+        room:'102',
+        brand:'เพอร์ร่า',
+        amount:4,
+      },
+      {
+        build:'A',
+        room:'103',
+        brand:'เพอร์ร่า',
+        amount:3,
+      },
+    ]
 
   },
   methods:{
       changeDate:function(){
-        console.log(this.dateSelected);
+        var i
+        for ( i = 0; i < this.dataSet.length; i++) {
+          let cloned = JSON.parse(JSON.stringify(TMP));
+          cloned.building=this.dataSet[i].build
+          cloned.room=this.dataSet[i].room
+          cloned.brand=this.dataSet[i].brand
+          cloned.amount=this.dataSet[i].amount
+          this.list.push(cloned)
+        }
       },
       sentDate: function() {     
         var myObj = {
           date: this.dateSelected
         };
-        console.log('wwwww'+myObj);
+        console.log('haaaa' + this.dateSelected);
+        console.log('wwwww = ' + myObj.date);
         axios.post('/api/notify/getWaterlist/', myObj).then(res => {
-          console.log('dddd'+res.data);
-          this.dateSelected=res.data;
-          setTimeout(()=>{this.manageList()},100)
+          console.log(res.data.data);
+          this.dataSet=res.data.data;
+          setTimeout(()=>{
+            this.changeDate()
+            },100)
 
         });
 

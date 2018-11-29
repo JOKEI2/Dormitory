@@ -1,3 +1,7 @@
+const TMP={
+  No: "", 
+  date: ""
+}
 new Vue({
   el: "#vue-app",
   data: {
@@ -163,19 +167,33 @@ new Vue({
       var i;
       this.listpackageNo=[]
       for ( i = 0; i < this.datasetThisRoom.length; i++) {
-        this.OnePackage.No = this.datasetThisRoom[i].number.toUpperCase()
+        let cloned = JSON.parse(JSON.stringify(TMP));
         s = new Date(Date.parse(this.datasetThisRoom[i].date))
-        this.OnePackage.date = s.toLocaleDateString()
-        this.listpackageNo.push(this.OnePackage)
-        this.OnePackage=this.EmptyOnePackage
+        cloned.No = this.datasetThisRoom[i].number.toUpperCase()
+        cloned.date = s.toLocaleDateString()
+        this.listpackageNo.push(cloned)
+        // this.OnePackage=this.EmptyOnePackage
       }
       console.log(this.listpackageNo);
       
-    }
+    },
+    // changeData:function(){
+    //   var i;
+    //   this.listpackageNo=[]
+    //   for ( i = 0; i < this.datasetThisRoom.length; i++) {
+    //     this.OnePackage.No = this.datasetThisRoom[i].number.toUpperCase()
+        
+    //     this.OnePackage.date = s.toLocaleDateString()
+    //     this.listpackageNo.push(this.OnePackage)
+    //     this.OnePackage=this.EmptyOnePackage
+    //   }
+    //   console.log(this.listpackageNo);
+      
+    // }
   },
   mounted() {
     
-    axios.get('/api/obj/all').then(res => {
+    axios.get('/api/obj/room').then(res => {
       this.datasetThisRoom=res.data.data
       console.log(res.data);
       setTimeout(() => {

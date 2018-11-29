@@ -38,16 +38,54 @@ const editData = (req, res) => {
     })
 }
 
-const repairDATA = (req, res) => {
+
+const washing = (req, res) => {
     console.log(req.body);
     // res.send(req.body);
-    const {building, room, repair} = req.body
+    // const {building, room, cleaning} = req.body
     // console.log(building);
     // console.log(room);
     // console.log(repair.electricity);
     // UPDATE notify SET electricity = 'true' ,  water = 'true' ,  airconditioner = 'true' ,  door = 'true' , other = 'true' where  building = 'A'and room = '101' ;
-    let query = db.query('UPDATE notify SET electricity = ? ,  water = ? ,  airconditionerRe = ? ,  door = ? , other = ? where  building = ? and room = ? ', 
-    [req.body.repair.electricity , req.body.repair.water , req.body.repair.air , req.body.repair.door , req.body.repair.other , req.body.building , req.body.room ], 
+    let query = db.query('UPDATE notify SET bedroom = ? ,  toilet = ? ,  airconditioner = ?  where  building = ? and room = ? ', 
+    [cleaning.bedroom , cleaning.toilet , cleaning.air , building , room ], 
+    (err, data) => {
+        //console.log(query.sql)
+        if (err) {
+            console.log("fail");
+            res.status(500).json({
+                success: false
+            })
+        }
+        else {
+            if (data.length > 0) {
+                req.session.user = data[0]
+                req.session.save(() => {
+                    res.json({
+                        success: true,
+                    })
+                })
+            }
+            else {
+                res.status(400).json({
+                    success: false,
+                    msg: 'Wrong username or password'
+                })
+            }
+        }
+    })
+}
+
+
+const repairDATA = (req, res) => {
+    console.log(req.body);
+    // res.send(req.body);
+    const {building, room, repair} = req.body;
+    // console.log(building);
+    // console.log(room);
+    // console.log(repair.electricity);
+    // UPDATE notify SET electricity = 'true' ,  water = 'true' ,  airconditioner = 'true' ,  door = 'true' , other = 'true' where  building = 'A'and room = '101' ;
+    let query = db.query('SELECT * FROM washing where building ?', [req.body], 
     (err, data) => {
         //console.log(query.sql)
         if (err) {
@@ -133,9 +171,9 @@ const getData = (req, res) => {
 }
 
 const getWaterlist = (req, res) => {
-    const time = req.body.date;
-    console.log('dddd' + time);
-    db.query('SELECT * FROM water_list where date = ?',[time], (err, data) => {
+    const buff = req.body.date;
+    console.log('dddd = ' + buff);
+    db.query('SELECT * FROM water_list where date = ?',[buff], (err, data) => {
 
         if (err) {
             console.error(err)
@@ -147,31 +185,43 @@ const getWaterlist = (req, res) => {
                 success: true,
                 data
             })
-            console.log(data.room)
+            // console.log(data.room)
         }
     })
 }
 
 const buywater = (req, res) => {
-    const buff = req.body.building;
-    console.log('dddd' + buff);
-    // if(buff != 'A' && buff != 'b' && buff != 'c'){
-    //     db.query('SELECT * FROM water_list where date = ?',[buff], (err, data) => {
+    const buff = req.body;
 
-    //         if (err) {
-    //             console.error(err)
-    //             res.status(500).json({
-    //                 success: false
-    //             })
-    //         } else {
-    //             res.json({
-    //                 success: true,
-    //                 data
-    //             })
-    //             console.log(data.room)
-    //         }
-    //     })
-    // }
+    console.log('brand = ' + buff.brand);
+    console.log('amount = ' + buff.amount);
+
+    let query = db.query('UPDATE water_list SET brand = ? , amount = ? where room = 101',[buff.brand,buff.amount],
+    (err, data) => {
+        console.log(query.sql)
+        if (err) {
+            console.log("fail " + err);
+            res.status(500).json({
+                success: false
+            })
+        }
+        else {
+            if (data.length > 0) {
+                req.session.user = data[0]
+                req.session.save(() => {
+                    res.json({
+                        success: true,
+                    })
+                })
+            }
+            else {
+                res.status(400).json({
+                    success: false,
+                    msg: 'Wrong username or password'
+                })
+            }
+        }
+    })
     
 }
 
@@ -472,6 +522,38 @@ const airdt = (req, res) => {
     })
 }
 
+const postbox = (req, res) => {
+    console.log(req.body);
+    const {date, room, time} = req.body
+    // let query = db.query('UPDATE notify SET airconditionertime = ?, airconditionerdate = ? where  room = ? ', 
+    // [time,date , room ], 
+    // (err, data) => {
+    //     //console.log(query.sql)
+    //     if (err) {
+    //         console.log("fail");
+    //         res.status(500).json({
+    //             success: false
+    //         })
+    //     }
+    //     else {
+    //         if (data.length > 0) {
+    //             req.session.user = data[0]
+    //             req.session.save(() => {
+    //                 res.json({
+    //                     success: true,
+    //                 })
+    //             })
+    //         }
+    //         else {
+    //             res.status(400).json({
+    //                 success: false,
+    //                 msg: 'Wrong username or password'
+    //             }) 
+    //         }
+    //     }
+    // })
+}
+
 function sendline(msg){
     request({
         method: 'POST',
@@ -511,5 +593,7 @@ export default{
     getWaterlist,
     show_list,
     buywater,
-    annoy
+    annoy,
+    washing,
+    postbox
 }
