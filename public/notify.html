@@ -5,9 +5,11 @@
   <meta charset="utf-8">
   <title>Notify</title>
   <link type="image/png" href="pic/icon.png" rel="shortcut icon">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-  <link rel="stylesheet" href="notify.css" </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+  <link rel="stylesheet" href="notify.css" >
+</head>
 
   <body>
     <div class="container" id="notify">
@@ -27,18 +29,20 @@
       <div class="cleaningsection">
         <br>
         <div class="sectionheader">
-          <font color="EE999E" size="6%">แจ้งทำความสะอาด</font>
-          <br><br>
+          <p style="margin-bottom: 15px;">แจ้งทำความสะอาด</p>
           <hr width="90%" size="3" color="#E9AC87">
         </div>
         <div class="rectangle">
-          <div class="sectionbody"><input type="checkbox" value="ห้องนอน" v-model="cleaning" id="cleaning"><label> ห้องนอน</label></div>
+          <div class="sectionbody"><input type="checkbox" value="ห้องนอน" v-model="cleaning" id="cleaning">
+            <label style="font-size: 16pt; color: grey; font-weight: bold"> ห้องนอน</label></div>
         </div>
         <div class="rectangle">
-          <div class="sectionbody"><input type="checkbox" value="ห้องน้ำ" v-model="cleaning" id="cleaning"><label> ห้องน้ำ</label></div>
+          <div class="sectionbody"><input type="checkbox" value="ห้องน้ำ" v-model="cleaning" id="cleaning">
+            <label style="font-size: 16pt; color: grey; font-weight: bold"> ห้องน้ำ</label></div>
         </div>
         <div class="rectangle">
-          <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="cleaning" id="cleaning"><label> แอร์</label></div>
+          <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="cleaning" id="cleaning">
+            <label style="font-size: 16pt; color: grey; font-weight: bold"> แอร์</label></div>
         </div>
 
         <!-- Trigger/Open The Modal -->
@@ -47,7 +51,6 @@
         <div id="cleaningModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close">&times;</span>
             <p><b>คุณได้แจ้งให้ทำความสะอาด : </b>
             <b v-for="list in cleaning">{{list}} </b></p><br>
             <p>ทางหอพักจะดำเนินการให้เร็วที่สุด</p>
@@ -58,33 +61,43 @@
       <div class="repairsection">
         <br>
         <div class="sectionheader">
-          <font color="EE999E" size="6%">แจ้งซ่อม</font>
-          <br><br>
+          <p style="margin-bottom: 15px;">แจ้งซ่อม</p>
           <hr width="90%" size="3" color="#E9AC87">
         </div>
         <div class="smallrectangleleft">
-            <div class="sectionbody"><input type="checkbox" value="ไฟ" v-model="repair"><label> ไฟ</label></div>
+            <div class="sectionbody"><input type="checkbox" value="ไฟ" v-model="repair">
+              <label style="font-size: 16pt; color: grey; font-weight: bold"> ไฟ</label></div>
           </div>
           <div class="smallrectangleright">
-            <div class="sectionbody"><input type="checkbox" value="น้ำ" v-model="repair"><label> น้ำ</label></div>
+            <div class="sectionbody"><input type="checkbox" value="น้ำ" v-model="repair">
+              <label style="font-size: 16pt; color: grey; font-weight: bold"> น้ำ</label></div>
           </div>
           <div class="smallrectangleleft">
-            <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="repair"><label> แอร์</label></div>
+            <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="repair">
+              <label style="font-size: 16pt; color: grey; font-weight: bold"> แอร์</label></div>
           </div>
           <div class="smallrectangleright">
-            <div class="sectionbody"><input type="checkbox" value="ประตูและหน้าต่าง" v-model="repair"><label> ประตูและหน้าต่าง</label></div>
+            <div class="sectionbody"><input type="checkbox" value="ประตูและหน้าต่าง" v-model="repair">
+              <label style="font-size: 16pt; color: grey; font-weight: bold"> ประตูและหน้าต่าง</label></div>
           </div>
+          <!-- <div class="rectangle" style="padding-top:10px;padding-bottom:10px;"> -->
           <div class="rectangle">
-            <div class="sectionbody"><label> อื่นๆ</label>
-              <input type="text" v-model="other" id="other" style="height:25px;" size="40"></div>
+              <label style="margin-left:8px; font-size: 16pt; color: grey; font-weight: bold"> อื่นๆ </label>
+              <input id="other" type="text" v-model="other" style="height:25px; margin-top: 5px;"
+               pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$"
+               oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" 
+               oninput="setCustomValidity('')">
+              <div class="display_hidden"id="dp_other"></div>
+            <!-- <div class="sectionbody"><label> อื่นๆ</label>
+              <input type="text" v-model="other" id="other" style="height:25px;" size="40"></div> -->
           </div>
+          
 
         <div class="buttonsection bt"><button class="button" v-on:click="openformRepair">ตกลง</button></div>
         <!-- The Modal -->
         <div id="repairModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
-            <!-- <span class="close">&times;</span> -->
             <p><b>คุณได้แจ้งซ่อม : </b>
             <b v-for="list in repair">{{list}} </b>
             <b v-if="other !== none">{{other}}</b></p><br>
@@ -96,59 +109,97 @@
       <div class="annoysection">
         <br>
         <div class="sectionheader">
-          <font color="EE999E" size="6%">แจ้งรบกวน</font>
-          <br><br>
+          <p style="margin-bottom: 15px;">แจ้งรบกวน</p>
           <hr width="90%" size="3" color="#E9AC87">
         </div>
-        <form>
-        <div class="smallrectangleleft">
-          <div class="sectionbody"><p>ตึก <input type="text" id="alertbuilding" maxlength=1 v-model="alertbuilding"></p></div>
-        </div>
-        <div class="smallrectangleright">
-          <div class="sectionbody"><p>ห้อง <input type="text" id="alertroom" maxlength=3 v-model="alertroom"></p></div>
-        </div>
+        <div class="smallestrectangle">
+            <div class="custom-select">
+                <select id="buildingSelected">
+                  <option selected disabled hidden>ตึก</option>
+                  <option v-for="(b,key,index) in building">{{ b }}</option>
+                </select>
+              </div>
+          <!-- <div class="sectionbody"><p>ตึก <input type="text" id="alertbuilding" maxlength=1 v-model="alertbuilding"></p></div> -->
+            <!-- <div class="dropdown">
+              <button class="dropbtn">ตึก</button>
+              <div class="dropdown-content">
+                <a href="#" v-model="alertbuilding" value="A" id="alertbuildingA" v-onclick="selected">A</a>
+                <a href="#" v-model="alertbuilding" value="B" id="alertbuildingB">B</a>
+                <a href="#" v-model="alertbuilding" value="C" id="alertbuildingC">C</a>
+              </div>
+            </div> -->
+          </div>
+
+        <div class="smallestrectangle">
+          <!-- <div class="sectionbody"><p>ห้อง <input type="text" id="alertroom" maxlength=3 v-model="alertroom"></p></div> -->
+            <div class="custom-select">
+              <select id="floorSelected">
+                <option selected disabled hidden>ชั้น</option>
+                <option v-for="(f,key,index) in floor" id="floorSelected">{{ f }}</option>
+              </select>
+            </div>
+          </div>
+
+        <div class="smallestrectangle">
+          <!-- <div class="sectionbody"><p>ห้อง <input type="text" id="alertroom" maxlength=3 v-model="alertroom"></p></div> -->
+            <div class="custom-select">
+              <select id="roomSelected">
+                <option selected disabled hidden>ห้อง</option>
+                <option v-for="(r,key,index) in room" id="roomSelected">{{ r }}</option>
+              </select>
+            </div>
+          </div>
+
         <div class="bigrectangle">
           <div class="sectionbody">
-          <p>เรื่อง </p><textarea v-model="topic" id="topic"></textarea>
+          <!-- <p>เรื่อง </p><textarea v-model="topic" id="topic"></textarea> -->
+          <p style="font-size: 14pt; color: grey; font-weight: bold;"> เรื่อง
+          <textarea id="topic1" v-model="topic"
+               pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$"
+              >
+              <!--  oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" 
+               required oninput="setCustomValidity('')" -->
+              <div class="display_hidden" id="dp_topic"></div>
+          </textarea></p>
+          </div>
         </div>
-        </div>
-        </form>
         <div class="buttonsection bt"><button class="button" v-on:click="openformAnnoy">ตกลง</button></div>
         <!-- The Modal -->
-        <div id="annoyModal" class="modal">
+        <div id="annoycaseModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close">&times;</span>
-            <p><b>คุณได้แจ้งไปยัง : ห้อง {{alertroom}} ตึก {{alertbuilding}}</b>
+            <p><b>ทำการแจ้ง</b>
+            <b v-if="annoycase0 === true || annoycase1 === true || annoycase2 === true"> ไปยัง : </b>
+            <b v-if="annoycase0 === true">ตึก {{buildingSelected}} </b>
+            <b v-if="annoycase1 === true">ชั้น {{floorSelected}}</b>
+            <b v-if="annoycase2 === true">ห้อง {{roomSelected}}</b></p>
+            <!-- <b v-if="annoycase0 === true">ตึก {{customer.annoy.building}} </b>
+            <b v-if="annoycase1 === true">ชั้น {{customer.annoy.floor}}</b>
+            <b v-if="annoycase2 === true">ห้อง {{customer.annoy.room}}</b></p> -->
             <p><b>เรื่อง : {{topic}}</b></p><br>
             <p>ทางหอพักจะดำเนินการให้เร็วที่สุด</p>
           </div>
       </div>
 
-      <!-- The Modal -->
-      <div id="caseModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <p v-if="case0 === true"><b>กรุณากรอกข้อมูลให้ครบ! </b></p>
-            <p v-if="case1 === true"><b> ข้อมูลไม่ถูกต้อง! กรุณาตรวจสอบอักขระให้ถูกต้อง </b></p>
-          </div>
-        </div>
 
          <!-- The Modal -->
       <div id="uncompleteModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span>
-          <p><b> กรุณากรอกข้อมูลให้ครบ! </b></p>
+          <p><b> กรุณากรอกหรือเลือกข้อมูล </b></p>
         </div>
       </div>
 
         <!-- The Modal -->
-      <div id="incorrectModal" class="modal">
+      <div id="caseModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
-            <span class="close">&times;</span>
-            <p><b>ข้อมูลไม่ถูกต้อง! กรุณาตรวจสอบอักขระให้ถูกต้อง </b></p>
+            <b>กรุณาเลือก</b>
+            <b v-if="case0 === true">ตึกและชั้น</b>
+            <b v-if="case1 === true">ตึก</b>
+            <b v-if="case2 === true">ชั้น </b>
+            <b v-if="case3 === true">ตึก </b>
+            <!-- <b v-if="case3 == true"></b> -->
           </div>
         </div>
 
