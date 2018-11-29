@@ -6,19 +6,19 @@ var CustomerData = new Vue({
     account: 'สมหมาย มีชัย',
     accountID: "1111111111",
     customer: [{
-      name: 'สมหมาย มีชัย',
-      id: '1111111111111',
-      phoneNumb: '0811111111',
-      lineID: 'Xxxxxxx',
-      email: 'Xxxxxxx@gmail.com',
+      name: '',
+      id: '',
+      phoneNumb: '',
+      lineID: '',
+      email: '',
       priority: 'ผู้เช่าหลัก',
     },
     {
-      name: 'สมศรี มีชัย',
-      id: '2222222222222',
-      phoneNumb: '0822222222',
-      lineID: 'Yyyyyyy',
-      email: 'Yyyyyyyy@gmail.com',
+      name: '',
+      id: '',
+      phoneNumb: '',
+      lineID: '',
+      email: '',
       priority: 'ผู้เช่ารอง',
 
     }],
@@ -244,14 +244,14 @@ var CustomerData = new Vue({
     },
   },
   mounted() {
-    axios.get('/api/room/101').then(res => {
+    axios.get('/api/room/pro').then(res => {
       console.log(res.data)
       this.dataSetCus=res.data.data[0]
       console.log(this.dataSetCus.lastname_2);
       
       setTimeout(() => {
         this.changeData();
-      }, 100);
+      }, 400);
     })
     
   }

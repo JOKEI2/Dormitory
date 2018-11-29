@@ -325,6 +325,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/bedroomdt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ทำความสะอาดห้องนอน วันที่ :"+this.customer[this.selectedIndex].clean.bedroom.date+" เวลา : "+this.customer[this.selectedIndex].clean.bedroom.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -354,6 +356,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/toiletdt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ทำความสะอาดห้องน้ำ วันที่ :"+this.customer[this.selectedIndex].clean.toilet.date+" เวลา : "+this.customer[this.selectedIndex].clean.toilet.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -383,6 +387,8 @@ new Vue({
           console.log(myObj);
           axios.post('/api/notify/airdt/', myObj).then(res => {
             console.log(res.data)
+            var msg = "ทำความสะอาดแอร์ วันที่ :"+this.customer[this.selectedIndex].clean.airConditioner.date+" เวลา : "+this.customer[this.selectedIndex].clean.airConditioner.time
+            this.sendline(msg)
           });
         }
         this.selectedIndex = -1;
@@ -412,6 +418,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/elecdt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ซ่อมไฟ วันที่ :"+this.customer[this.selectedIndex].repair.electricity.date+" เวลา : "+this.customer[this.selectedIndex].repair.electricity.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -440,6 +448,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/waterdt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ซ่อมน้ำ วันที่ :"+this.customer[this.selectedIndex].repair.water.date+" เวลา : "+this.customer[this.selectedIndex].repair.water.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -468,6 +478,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/airredt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ซ่อมแอร์ วันที่ :"+this.customer[this.selectedIndex].repair.airConditioner.date+" เวลา : "+this.customer[this.selectedIndex].repair.airConditioner.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -496,6 +508,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/doordt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ซ่อมประตู/หน้าต่าง วันที่ :"+this.customer[this.selectedIndex].repair.door.date+" เวลา : "+this.customer[this.selectedIndex].repair.door.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -524,6 +538,8 @@ new Vue({
         console.log(myObj);
         axios.post('/api/notify/otherdt/', myObj).then(res => {
           console.log(res.data)
+          var msg = "ซ่อม "+ this.customer[this.selectedIndex].repair.other.isOther+" วันที่ :"+this.customer[this.selectedIndex].repair.other.date+" เวลา : "+this.customer[this.selectedIndex].repair.other.time
+          this.sendline(msg)
         });
       }
       this.selectedIndex = -1;
@@ -611,7 +627,29 @@ new Vue({
         // cloned=this.default_selectedCus
       }
       console.log(this.dataset)
+    },
+    sendline:function (msg){
+      request({
+          method: 'POST',
+          uri: 'https://notify-api.line.me/api/notify',
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          auth: {
+            bearer: 'dvR6TeBMQlqxEJDcRANBpTi6KyJlFMEWeEd9nTFLTbH', //token
+          },
+          form: {
+            message: msg, //ข้อความที่จะส่ง
+          },
+        }, (err, httpResponse, body) => {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(body)
+          }
+        })
     }
+    
   },
   mounted() {
     axios.get('/api/notify/show').then(res => {
@@ -632,3 +670,5 @@ new Vue({
     });
   }
 });
+
+
