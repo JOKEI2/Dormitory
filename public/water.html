@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>water</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <link rel="stylesheet" href="water.css" />
+    <!-- Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- bootstrap -->
+    <!--
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="vue-app">
+      <div class="container" id="CustomerData">
+        <header>
+          <div class="bt_a"><a href="login.html">log out</a></div>
+          <h1><img src="pic/logo.png" class="center middle" /></h1>
+        </header>
+        <ul class="sticky" id="nav-bar" style="display:flex; flex:1;">
+          <li style="flex:1; font-size:28pt;">
+            <a href="profile.html"> <p>ข้อมูล</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a href="washing.html"> <p>เครื่องซักผ้า</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a href="notify.html"> <p>แจ้ง</p> </a>
+          </li>
+
+          <li style="flex:1; font-size:28pt;">
+            <a href="postbox.html"> <p>พัสดุ</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a class="active"> <p>สั่งซื้อน้ำดื่ม</p> </a>
+          </li>
+        </ul>
+        <div class="section">
+          <div id="top">
+            <h1>สั่งซื้อน้ำดื่ม</h1>
+            <hr />
+            <div class="custom-select">
+              <!-- class="custom-select" -->
+              <select>
+                <option selected disabled hidden>กรุณาเลือกตราน้ำดื่ม</option>
+                <option v-for="(b,key,index) in brand">{{ b }}</option>
+              </select>
+            </div>
+            <div class="inputDesign">
+              <input type="number" min="0" v-model="amount" />
+            </div>
+            <div class="bt">
+              <button type="button" v-on:click="openform">สั่งน้ำ</button>
+            </div>
+
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                  <p><b>ทำการสั่งน้ำเรียบร้อย</b></p>
+                  <p>น้ำดื่มตรา " {{brandSelected}} " จำนวน {{amount}} แพ็ค</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vue.js -->
+    <script src="water.js" charset="utf-8"></script>
+  </body>
+</html>

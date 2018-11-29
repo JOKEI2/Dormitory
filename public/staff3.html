@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dormitory-Staff</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+    <link rel="stylesheet" href="staff3.css" >
+    <!-- bootstrap -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Vue.js -->
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="vue-app">
+      <div id="allTable">
+        <div id="center" >
+          <h1>ตารางส่งน้ำ</h1>
+          <h2>วันที่ : <input type="date" v-model="dateSelected"><button type="button" v-on:click="sentDate()">ค้น</button></h2>
+        </div>
+        <div v-if="list.length<13">
+          <div id="one">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_one">
+                <tr v-for="(l,key,index) in list">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div v-else-if="list.length<25">
+          <div id="two_left">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_two_left">
+                <tr v-for="(l,key,index) in manageList(1,2)">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="two_right">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_two_right">
+                <tr v-for="(l,key,index) in manageList(2,2)">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div v-else>
+          <div id="left">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_left">
+                <tr v-for="(l,key,index) in manageList(1,3)">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="middle">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_middle">
+                <tr v-for="(l,key,index) in manageList(2,3)">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="right">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th>อาคาร</th>
+                  <th>ห้อง</th>
+                  <th>ตรา</th>
+                  <th>จำนวน(แพ็ค)</th>
+                </tr>
+              </thead>
+              <tbody id="fix_head_right">
+                <tr v-for="(l,key,index) in manageList(3,3)">
+                  <td>{{l.building}}</td>
+                  <td>{{l.room}}</td>
+                  <td>{{l.brand}}</td>
+                  <td>{{l.amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="bottom">
+          <div id="inBottom">
+            <button type="button" v-on:click="nextSetDateAndTime">กำหนดวันและเวลา</button>
+            <button type="button" v-on:click="nextSchedule">ตารางงานรายวัน</button>
+          </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- Vue.js -->
+    <script src="staff3.js" charset="utf-8"></script>
+  </body>
+</html>

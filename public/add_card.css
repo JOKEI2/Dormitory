@@ -1,0 +1,115 @@
+body{
+    background-image: url("pic/bg.png");
+  }
+  /* Font */
+  @font-face {
+    font-family: Nithan;
+    src: url(font/Nithan.ttf);
+  }
+  *{
+    font-family: Nithan;
+  }
+  hr{
+    width: 90%;
+    margin-bottom: 20px;
+  }
+  .sc-container h1{
+    text-align: center;
+  }
+  .display_hidden{
+    display: none;
+    font-size: 10pt;
+    color: red;
+    margin-left: 60px;
+    margin-top: 0px !important;
+    margin-bottom: 10px;
+  }
+#sc-password {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: #F0DDDE;
+    max-width: 500px;
+    /* margin: 0 auto; */
+    margin-top: 150px;
+    /* margin-bottom: 2%;
+    transition: opacity 1s;
+    -webkit-transition: opacity 1s; */
+    border: 5px solid #F0DDDE;
+    border-radius: 20px;
+    /* width: 35%; */
+    padding-bottom: 30px;
+    font-family: Nithan;
+  
+  }
+#sc-password input[type="date"],
+#sc-password input[type="text"]{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background: #fff;
+    border: 1px solid #ccc;
+    font-family: Nithan;
+    font-size: 22px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    margin-top: 10px
+
+}
+#sc-password input[type="text"]:focus,
+#sc-password input[type="date"]:focus{
+    background: #f1f1f1 !important;
+  }
+#sc-password input[type="submit"] {
+    width: 100%;
+    background: #ee999e;
+    border: 0;
+    text-align: center;
+    padding: 10px 0px;
+    font-family: Nithan;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .3s;
+    -webkit-transition: background .3s;
+    border: 5px solid #F0DDDE;
+    border-radius: 40px;
+    width: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    font-weight: bold;
+}
+#sc-password input[type="submit"]:hover {
+background: #da6970;
+}
+@media (max-width: 415px) {
+
+    .sc-container h1{
+      font-size: 21px !important;
+    }
+    #sc-password {
+     
+      max-width: 300px;
+      margin-top: 150px;
+    
+    }
+   #sc-password input[type="submit"] { 
+      font-size: 20px !important;
+      text-align: center;
+      
+    }
+    #sc-password input[type="text"],#sc-password input[type="date"] {
+     font-size: 18px !important;
+    }
+    .display_hidden{
+        display: none;
+        font-size: 10pt;
+        color: red;
+        margin-left: 30px;
+        margin-top: 0px !important;
+        margin-bottom: 10px;
+      }
+  }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dormitory-Staff</title>
+  <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+  <link rel="stylesheet" href="staff1.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <!-- Vue.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="vue-app">
+    <div class="bt_a"><a href="login.html">log out</a></div>
+    <div id="allTable">
+      <div id="center">
+        <h1>กำหนดวันและเวลา</h1>
+      </div>
+      <div id="left">
+        <h2>ตารางทำความสะอาด</h2>
+        <table class="fixed_header">
+          <thead>
+            <tr>
+              <th>อาคาร</th>
+              <th>ห้อง</th>
+              <th>ห้องนอน</th>
+              <th>ห้องน้ำ</th>
+              <th>แอร์</th>
+            </tr>
+          </thead>
+          <tbody id="fix_head1">
+            <tr v-for="(cus,key,index) in customer" v-if="(cus.clean.bedroom.isTrue==true && (cus.clean.bedroom.time=='' || cus.clean.bedroom.date==''))||(cus.clean.toilet.isTrue==true && (cus.clean.toilet.time=='' || cus.clean.toilet.date==''))||(cus.clean.airConditioner.isTrue==true && (cus.clean.airConditioner.time=='' || cus.clean.airConditioner.date==''))">
+              <td>{{cus.building}}</td>
+              <td>{{cus.room}}</td>
+              <td v-if="cus.clean.bedroom.isTrue==true && (cus.clean.bedroom.time=='' || cus.clean.bedroom.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormCleanBedroom',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.clean.toilet.isTrue==true && (cus.clean.toilet.time=='' || cus.clean.toilet.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormCleanToilet',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.clean.airConditioner.isTrue==true && (cus.clean.airConditioner.time=='' || cus.clean.airConditioner.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormCleanAirConditioner',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="right">
+        <h2>ตารางซ่อม</h2>
+        <table class="fixed_header">
+          <thead>
+            <tr>
+              <th>อาคาร</th>
+              <th>ห้อง</th>
+              <th>ไฟ</th>
+              <th>น้ำ</th>
+              <th>แอร์</th>
+              <th>ประตู/หน้าต่าง</th>
+              <th>อื่นๆ</th>
+            </tr>
+          </thead>
+          <tbody id="fix_head2">
+            <tr v-for="(cus,key,index) in customer" v-if="(cus.repair.electricity.isTrue==true && (cus.repair.electricity.time=='' || cus.repair.electricity.date==''))||(cus.repair.water.isTrue==true && (cus.repair.water.time=='' || cus.repair.water.date=='')) ||(cus.repair.airConditioner.isTrue==true && (cus.repair.airConditioner.time=='' || cus.repair.airConditioner.date==''))||(cus.repair.door.isTrue==true && (cus.repair.door.time=='' || cus.repair.door.date==''))|| ( cus.repair.electricity.isOther!=='' && (cus.repair.other.time=='' || cus.repair.other.date==''))">
+              <td>{{cus.building}}</td>
+              <td>{{cus.room}}</td>
+              <td v-if="cus.repair.electricity.isTrue==true && (cus.repair.electricity.time=='' || cus.repair.electricity.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormRepairElectricity',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.repair.water.isTrue==true && (cus.repair.water.time=='' || cus.repair.water.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormRepairWater',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.repair.airConditioner.isTrue==true && (cus.repair.airConditioner.time=='' || cus.repair.airConditioner.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormRepairAirConditioner',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.repair.door.isTrue==true && (cus.repair.door.time=='' || cus.repair.door.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormRepairDoor',key)">&#10003;</a>
+                </div>
+              </td>
+              <td v-else></td>
+              <td v-if="cus.repair.other.isOther!=='' && (cus.repair.other.time=='' || cus.repair.other.date=='')">
+                <div class="buttonA">
+                  <a v-on:click="openform('setDateTimeFormRepairOther',key)">{{cus.repair.other.isOther}}</a>
+                </div>
+              </td>
+              <td v-else></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="bottom">
+        <div id="inBottom">
+          <button type="button" v-on:click="nextSchedule">ตารางงานรายวัน</button>
+          <button type="button" v-on:click="nextSentDrinkingWater">ตารางส่งน้ำ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- pop up set Date & Time clean -->
+    <div id="setDateTimeFormCleanBedroom" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ทำความสะอาดห้องนอน</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date"v-on:keyup="check(selectedCus.clean.bedroom.date,'dp_infoCleanBedroom')" v-model="selectedCus.clean.bedroom.date" required><br>
+          <div class="display_hidden"id="dp_infoCleanBedroom"></div>   
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.clean.bedroom.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeCleanBedroom('setDateTimeFormCleanBedroom',selectedCus.clean.bedroom.date,'dp_infoCleanBedroom')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormCleanBedroom')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormCleanToilet" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ทำความสะอาดห้องน้ำ</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.clean.toilet.date,'dp_infoCleanToilet')" v-model="selectedCus.clean.toilet.date" required><br>
+          <div class="display_hidden"id="dp_infoCleanToilet"></div>   
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.clean.toilet.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeCleanToilet('setDateTimeFormCleanToilet',selectedCus.clean.toilet.date,'dp_infoCleanToilet')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormCleanToilet')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormCleanAirConditioner" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ทำความสะอาดแอร์</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input v-on:keyup="check(selectedCus.clean.airConditioner.date,'dp_infoCleanAirConditioner')" type="date" v-model="selectedCus.clean.airConditioner.date" required><br>
+          <div class="display_hidden"id="dp_infoCleanAirConditioner"></div>      
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.clean.airConditioner.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeCleanAirConditioner('setDateTimeFormCleanAirConditioner',selectedCus.clean.airConditioner.date,'dp_infoCleanAirConditioner')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormCleanAirConditioner')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <!-- pop up set Date & Time repair -->
+    <div id="setDateTimeFormRepairElectricity" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ซ่อมไฟ</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.repair.electricity.date,'dp_infoRepairElectricity')" v-model="selectedCus.repair.electricity.date" required><br>
+          <div class="display_hidden"id="dp_infoRepairElectricity"></div>  
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.repair.electricity.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeRepairElectricity('setDateTimeFormRepairElectricity',selectedCus.repair.electricity.date,'dp_infoRepairElectricity')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormRepairElectricity')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormRepairWater" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ซ่อมน้ำ</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.repair.water.date,'dp_infoRepairWater')" v-model="selectedCus.repair.water.date" required><br>
+          <div class="display_hidden"id="dp_infoRepairWater"></div>  
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.repair.water.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeRepairWater('setDateTimeFormRepairWater',selectedCus.repair.water.date,'dp_infoRepairWater')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormRepairWater')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormRepairAirConditioner" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ซ่อมแอร์</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.repair.airConditioner.date,'dp_infoRepairAirConditioner')"v-model="selectedCus.repair.airConditioner.date" required><br>
+          <div class="display_hidden"id="dp_infoRepairAirConditioner"></div>  
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.repair.airConditioner.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeRepairAirConditioner('setDateTimeFormRepairAirConditioner',selectedCus.repair.airConditioner.date,'dp_infoRepairAirConditioner')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormRepairAirConditioner')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormRepairDoor" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ซ่อมประตู/หน้าต่าง</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.repair.door.date,'dp_infoRepairDoor')" v-model="selectedCus.repair.door.date" required><br>
+          <div class="display_hidden"id="dp_infoRepairDoor"></div>  
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.repair.door.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeRepairDoor('setDateTimeFormRepairDoor',selectedCus.repair.door.date,'dp_infoRepairDoor')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormRepairDoor')">ปิด</button>
+        </div>
+      </div>
+    </div>
+    <div id="setDateTimeFormRepairOther" class="modal">
+      <div class="modal-content"style="max-width: 500px;">
+        <div class="modal-header">
+            <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            <h4>ซ่อม{{selectedCus.repair.other.isOther}}</h4>
+        </div>
+        <div class="modal-body">
+          <label><b>วัน : </b></label><input type="date" v-on:keyup="check(selectedCus.repair.other.date,'dp_infoRepairOther')" v-model="selectedCus.repair.other.date" required><br>
+          <div class="display_hidden"id="dp_infoRepairOther"></div>  
+          <label><b>เวลา : </b></label><input type="time" v-model="selectedCus.repair.other.time" required><br>
+        </div>
+        <div class="modal-footer bt">
+          <button type="button" v-on:click="sentDateAndTimeRepairOther('setDateTimeFormRepairOther',selectedCus.repair.other.date,'dp_infoRepairOther')">บันทึก</button>
+          <button type="button" v-on:click="closeForm('setDateTimeFormRepairOther')">ปิด</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Vue.js -->
+  <script src="staff1.js" charset="utf-8"></script>
+</body>
+
+</html>

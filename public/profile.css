@@ -1,0 +1,345 @@
+*{
+    margin:0 auto;
+    padding: 0;
+}
+body{
+    background-image: url("pic/bg.png"); 
+}
+  header{
+      text-align: center;
+      padding-top: 15px;
+  }
+  
+  ul {
+    list-style-type: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #EFC8B0;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+
+}
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+  }
+  li {
+      float: left;
+  }
+  
+  li a {
+      /* display: flex;
+      flex: 1; */
+      color: white;
+      /* text-align: center; */
+      /* padding: 27px 110px; */
+      text-decoration: none;
+      /* padding-top: 10px;
+      padding-bottom: 10px; */
+  }
+  
+  li a:hover {
+      display: flex;
+      flex: 1;
+      background-color: #EE999E;
+      text-align: center;
+      /* padding: 30%; */
+  }  
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+    font-size: 18pt;
+}
+
+tr:nth-child(even) {
+    /* background-color: #f2f2f2; */
+    background-color: #F4BCC0;
+    font-size: 14pt;
+}
+
+.active {
+    background-color: grey;
+    display: flex;
+    flex: 1;
+    text-align: center;
+    /* padding: 30%; */
+    /* border: 1px solid white; */
+
+    /* padding-right: auto; */
+}
+
+  .container{
+      font-family: Nithan;
+      /* padding-bottom: 50px; */
+  }
+
+  .section{
+    text-align: center;
+    width:100%;
+    padding-bottom: 500px;
+  }
+
+  .profile{
+      text-align: center;
+      width: 35%;
+      margin-top: 85px;
+      margin-bottom: 20px;
+      margin-left: 5%;
+      background: white;
+      border-style: solid;
+      border-color: #E9AC87;
+      border-width: 3px;
+      /* padding-bottom: 10px; */
+      float: left;
+  }
+
+  .headersection{
+      width: 90%;
+      height: 70px; 
+      text-align: center;
+      margin-top: 10px;
+      font-size: 22pt;
+      /* background-color: #EE999E; */
+  }
+
+  /* .headersection p{
+      font-size: 22pt;
+      color: #EE999E;
+      font-weight: bold; 
+  } */
+
+  .headersection hr{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+  .bodysection{
+      width: 90%;
+      height: 70px; 
+      text-align: left;
+      margin-top: 0px;
+      /* background-color: #F7D1D3; */
+  }
+
+  .bodysection p{
+      font-size: 18pt;
+      color: grey;
+}
+
+ .customer{
+     width: 90%;
+     /* height: 260px;  */
+     margin-bottom: 10px;
+     margin-top: 20px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     /* text-align: right; */
+     /* margin-bottom: 0; */
+     background: #F7D1D3;
+}
+
+ .customer p{
+     text-align: left;
+     margin-left: 5%;
+     margin-bottom: 15px;
+    font-size: 16pt;
+    color: grey;   
+}
+
+.customer span{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16pt;
+    color: grey;   
+}
+
+.customer hr{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+  .account{
+      text-align: center;
+      width: 50%;
+      height: 225px;
+      margin-top: 85px;
+      margin-right: 5%;
+      background: white;
+      border-style: solid;
+      border-color: #E9AC87;
+      border-width: 3px;
+      float: right;
+  }
+
+  .rentandcost{
+    text-align: center;
+      width: 50%;
+      /* height: 270px; */
+      padding-bottom: 80px;
+      margin-top: 40px;
+      margin-right: 5%;
+      background: white;
+      border-style: solid;
+      border-color: #E9AC87;
+      border-width: 3px;
+      float: right;
+
+  }
+
+  .historyData{
+      text-align: center;
+      width: 50%;
+      /* height: 415px; */
+      /* padding-bottom: 2%; */
+      margin-top: 20px;
+      margin-bottom: 50px;
+      margin-right: 5%;
+      background: white;
+      border-style: solid;
+      border-color: #E9AC87;
+      border-width: 3px;
+      float: right;
+  }
+
+  .tablesection{
+      text-align: center;
+      width: 90%;
+      margin-bottom: 30px;
+      /* height: 280px; */
+      /* margin-top: 15px; */
+      /* margin-left: 60px; */
+      /* background-color: yellow; */
+      /* float: left; */
+  }
+
+  .buttonsectionAcct{
+      width: 90%;
+      /* height: 50px;       */
+      text-align: right;
+      padding-bottom: 15px;
+      /* margin-bottom: 15px; */
+  }
+  
+
+  .bt{
+    margin-bottom: 20px;
+}
+.bt button {
+  margin: 0px 5px;
+  padding: 5px 20px;
+  background: #ee999e;
+  color: white;
+  font-family: Nithan;
+  font-size: 15pt;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.bt :hover {
+  background: #da6970;
+}
+
+  .center {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+}
+
+.bt_a a{
+    text-decoration: none;
+    color:#EE999E;
+    border: none;
+    /* z-index: 9; */
+  }
+  .bt_a {
+    font-family: Nithan;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 9;
+    float: right;
+    margin-right: 10px;
+    border: none;
+    position: absolute;
+    right: 0;
+  }
+  .bt_a :hover{
+    text-decoration: underline;
+    color:#DA6970;
+    border: none;
+  }  
+  /* Font */
+  @font-face {
+      font-family: Nithan;
+      src: url(font/Nithan.ttf);
+  }
+  @media (max-width: 415px){
+    .center {
+        height: 40px;
+      }
+      .bt_a {
+        font-size: 20px;
+      }
+      .sticky a {
+        font-size: 22px;
+      }
+      .profile{
+        width: 90%;
+        float: none;
+        margin-top: 50px;
+        margin-left:15px;
+    }
+    .account{
+        width: 90%;
+        float: none;
+        margin-top: 30px;
+    }
+    .rentandcost{
+        width: 90%;
+        float: none;
+        padding-bottom: 10px;
+        margin-top: 30px;
+    }
+    .historyData{
+        width: 90%;
+        float: none;
+        margin-top: 30px;
+    }
+    .rentandcost th, .rentandcost td{
+        font-size: 8pt;
+    }
+    /* .rentandcost tr:nth-child(even){
+        font-size: 4pt;
+    } */
+    
+    th, td {
+        font-size: 10pt;
+    }
+    
+    /* tr:nth-child(even) {
+        font-size: 14pt;
+    } */
+
+    .profile headersection {
+        font-size: 22px;
+      }
+    .customer{
+        margin-top: 30px;
+    }
+    .section{
+        padding-bottom: 15px;
+    }
+
+  }

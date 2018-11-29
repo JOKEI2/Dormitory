@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Notify</title>
+  <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link rel="stylesheet" href="notify.css" </head>
+
+  <body>
+    <div class="container" id="notify">
+      <header>
+          <div class="bt_a"><a href="login.html">log out</a></div>
+        <h1><img src="pic/logo.png" class="center middle"></h1>
+      </header>
+      <!-- <nav> -->
+      <ul class="sticky" style="display:flex; flex:1;">
+        <li style="flex:1; font-size:28pt;"><a href="profile.html"><p>ข้อมูล</p></a></li>
+        <li style="flex:1; font-size:28pt;"><a href="washing.html"><p>เครื่องซักผ้า</p></a></li>
+        <li style="flex:1; font-size:28pt;"><a class="active"><p>แจ้ง</p></a></li>
+        <li style="flex:1; font-size:28pt;"><a href="postbox.html"><p>พัสดุ</p></a></li>
+        <li style="flex:1; font-size:28pt;"><a href="water.html"><p>สั่งซื้อน้ำดื่ม</p></a></li>
+      </ul>
+      <!-- </nav> -->
+      <div class="cleaningsection">
+        <br>
+        <div class="sectionheader">
+          <font color="EE999E" size="6%">แจ้งทำความสะอาด</font>
+          <br><br>
+          <hr width="90%" size="3" color="#E9AC87">
+        </div>
+        <div class="rectangle">
+          <div class="sectionbody"><input type="checkbox" value="ห้องนอน" v-model="cleaning" id="cleaning"><label> ห้องนอน</label></div>
+        </div>
+        <div class="rectangle">
+          <div class="sectionbody"><input type="checkbox" value="ห้องน้ำ" v-model="cleaning" id="cleaning"><label> ห้องน้ำ</label></div>
+        </div>
+        <div class="rectangle">
+          <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="cleaning" id="cleaning"><label> แอร์</label></div>
+        </div>
+
+        <!-- Trigger/Open The Modal -->
+        <div class="buttonsection bt"><button class="button" v-on:click="openformCleaning">ตกลง</button></div>
+        <!-- The Modal -->
+        <div id="cleaningModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><b>คุณได้แจ้งให้ทำความสะอาด : </b>
+            <b v-for="list in cleaning">{{list}} </b></p><br>
+            <p>ทางหอพักจะดำเนินการให้เร็วที่สุด</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="repairsection">
+        <br>
+        <div class="sectionheader">
+          <font color="EE999E" size="6%">แจ้งซ่อม</font>
+          <br><br>
+          <hr width="90%" size="3" color="#E9AC87">
+        </div>
+        <div class="smallrectangleleft">
+            <div class="sectionbody"><input type="checkbox" value="ไฟ" v-model="repair"><label> ไฟ</label></div>
+          </div>
+          <div class="smallrectangleright">
+            <div class="sectionbody"><input type="checkbox" value="น้ำ" v-model="repair"><label> น้ำ</label></div>
+          </div>
+          <div class="smallrectangleleft">
+            <div class="sectionbody"><input type="checkbox" value="แอร์" v-model="repair"><label> แอร์</label></div>
+          </div>
+          <div class="smallrectangleright">
+            <div class="sectionbody"><input type="checkbox" value="ประตูและหน้าต่าง" v-model="repair"><label> ประตูและหน้าต่าง</label></div>
+          </div>
+          <div class="rectangle">
+            <div class="sectionbody"><label> อื่นๆ</label>
+              <input type="text" v-model="other" id="other" style="height:25px;" size="40"></div>
+          </div>
+
+        <div class="buttonsection bt"><button class="button" v-on:click="openformRepair">ตกลง</button></div>
+        <!-- The Modal -->
+        <div id="repairModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <!-- <span class="close">&times;</span> -->
+            <p><b>คุณได้แจ้งซ่อม : </b>
+            <b v-for="list in repair">{{list}} </b>
+            <b v-if="other !== none">{{other}}</b></p><br>
+            <p>ทางหอพักจะดำเนินการให้เร็วที่สุด</p>
+          </div>
+      </div>
+      </div>
+
+      <div class="annoysection">
+        <br>
+        <div class="sectionheader">
+          <font color="EE999E" size="6%">แจ้งรบกวน</font>
+          <br><br>
+          <hr width="90%" size="3" color="#E9AC87">
+        </div>
+        <form>
+        <div class="smallrectangleleft">
+          <div class="sectionbody"><p>ตึก <input type="text" id="alertbuilding" maxlength=1 v-model="alertbuilding"></p></div>
+        </div>
+        <div class="smallrectangleright">
+          <div class="sectionbody"><p>ห้อง <input type="text" id="alertroom" maxlength=3 v-model="alertroom"></p></div>
+        </div>
+        <div class="bigrectangle">
+          <div class="sectionbody">
+          <p>เรื่อง </p><textarea v-model="topic" id="topic"></textarea>
+        </div>
+        </div>
+        </form>
+        <div class="buttonsection bt"><button class="button" v-on:click="openformAnnoy">ตกลง</button></div>
+        <!-- The Modal -->
+        <div id="annoyModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><b>คุณได้แจ้งไปยัง : ห้อง {{alertroom}} ตึก {{alertbuilding}}</b>
+            <p><b>เรื่อง : {{topic}}</b></p><br>
+            <p>ทางหอพักจะดำเนินการให้เร็วที่สุด</p>
+          </div>
+      </div>
+
+      <!-- The Modal -->
+      <div id="caseModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <p v-if="case0 === true"><b>กรุณากรอกข้อมูลให้ครบ! </b></p>
+            <p v-if="case1 === true"><b> ข้อมูลไม่ถูกต้อง! กรุณาตรวจสอบอักขระให้ถูกต้อง </b></p>
+          </div>
+        </div>
+
+         <!-- The Modal -->
+      <div id="uncompleteModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p><b> กรุณากรอกข้อมูลให้ครบ! </b></p>
+        </div>
+      </div>
+
+        <!-- The Modal -->
+      <div id="incorrectModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><b>ข้อมูลไม่ถูกต้อง! กรุณาตรวจสอบอักขระให้ถูกต้อง </b></p>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+
+    </div>
+    <script src="notify.js" charset="utf-8"></script>
+  </body>
+
+</html>

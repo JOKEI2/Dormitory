@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dormitory-Admin</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+    <link rel="stylesheet" href="admin.css" >
+    <!-- bootstrap -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Vue.js -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="vue-app">
+      <!-- <div class="sticky"> -->
+      <div class="bt_a"><a v-on:click="logout()">log out</a></div>
+      <h1><img src="pic/logo.png" class="center pic-sm"></h1>
+      <table class="fixed_header">
+        <thead>
+          <tr>
+            <th>อาคาร</th>
+            <th>ห้อง</th>
+            <th>สถานะการเช่า</th>
+            <th>ชื่อผู้เช่าหลัก</th>
+            <th>ชื่อผู้เช่ารอง</th>
+            <th>คำร้อง</th>
+            <th>สถานะการจ่ายค่าหอ</th>
+            <th>ค่าหอ</th>
+            <th>แจ้งพัสดุ</th>
+            <th>รับพัสดุ</th>
+            <th>ติดต่อ</th>
+          </tr>
+        </thead>
+         <tbody id="fix_head">
+            <tr v-for="(cus,key,index) in customer">
+              <td>{{cus.building}}</td>
+              <td>{{cus.room}}</td>
+              <td>
+              <select v-model="cus.hiringStatus">
+                <option v-on:click="sentHiringStatusToJson(key)">ว่าง</option>
+                <option v-on:click="sentHiringStatusToJson(key)">เช่าแล้ว</option>
+              </select>
+              </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-on:click="openform('informationCustomerFirstForm',key)">{{fullName(cus.customerFirst)}}</a>
+                </div>
+              </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-on:click="openform('informationCustomerSecondForm',key)">{{fullName(cus.customerSecond)}}</a>
+                </div>
+              </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-if="cus.request.annoy.building!==''" v-on:click="openform('requestForm',key)">รบกวน</a>
+                  <a v-else-if="cus.request.repair.electricity==true || cus.request.repair.water==true || cus.request.repair.airConditioner==true || cus.request.repair.door==true || cus.request.repair.other!==''" v-on:click="openform('requestForm',key)">ซ่อม</a>
+                  <a v-else-if="cus.request.clean.bedroom==true || cus.request.clean.toilet==true || cus.request.clean.other==true" v-on:click="openform('requestForm',key)">ทำความสะอาด</a>
+                  <a v-else>-</a>
+                </div>
+                </td>
+              <td v-if="cus.paymentStatus && cus.hiringStatus=='เช่าแล้ว'">ชำระแล้ว</td>
+              <td v-else-if="!cus.paymentStatus && cus.hiringStatus=='เช่าแล้ว'" style="color:red;">ค้างชำระ</td>
+              <td v-else></td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-on:click="openform('rentForm',key)">{{CalculateRent(cus.rent)}}</a>
+                </div>
+                </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-on:click="openform('haveObjForm',key)">มีพัสดุ</a>
+                </div>
+              </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'">
+                  <a v-on:click="openform('receiveObjForm',key)">รับ</a>
+                </div>
+              </td>
+              <td>
+                <div class="buttonDesign" v-if="cus.hiringStatus=='เช่าแล้ว'&&cus.customerFirst.firstname!=='-'">
+                    <a v-on:click="openform('connectForm',key)">ติดต่อ</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- <h1>สถานะการเช่า : {{ hiringStatus }}</h1> -->
+      <!-- pop up the first customer -->
+      <!-- The Modal -->
+      <div id="informationCustomerFirstForm" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content"style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+              </div>
+              <div class="modal-body">
+                <label><b>ชื่อ :</b></label><input id="infoCusFirst1" type="text" v-model="selectedCus.customerFirst.firstname" pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$" required oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" oninput="setCustomValidity('')"><br>
+                <div class="display_hidden"id="dp_infoCusFirst1"></div>          
+                <label><b>นามสกุล : </b></label><input id="infoCusFirst2"type="text" v-model="selectedCus.customerFirst.lastname" pattern="([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$" required oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" oninput="setCustomValidity('')"><br>
+                <div class="display_hidden"id="dp_infoCusFirst2"></div> 
+                <label><b>เบอร์ : </b></label>
+                <input id="infoCusFirst3"type="tel" maxlength="10" pattern="^[0]{1}([689]{1})(\d{8})+$" v-model="selectedCus.customerFirst.tel" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข 10 หลัก')" oninput="setCustomValidity('')"><br>
+                <div class="display_hidden"id="dp_infoCusFirst3"></div> 
+                <label><b>เลขบัตรประจำตัวประชาชน : </b></label>
+                <input id="infoCusFirst4"type="text" maxlength="13" pattern="^([\d]{13})+$" v-model="selectedCus.customerFirst.id" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข 13 หลัก')" oninput="setCustomValidity('')"><br>
+                <div class="display_hidden"id="dp_infoCusFirst4"></div> 
+              </div>
+            
+            <div class="modal-footer bt">
+            <button type="button" v-on:click="sentInformationFirstToJson('informationCustomerFirstForm')">บันทึก</button>
+            <button type="button" v-on:click="closeForm('informationCustomerFirstForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+      <!-- pop up the second customer -->
+      <div id="informationCustomerSecondForm" class="modal" >
+        <!-- Modal content -->
+        <div class="modal-content"style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            </div>
+            <div class="modal-body">
+              <label><b>ชื่อ :</b></label><input id="infoCusSecond1" type="text" v-model="selectedCus.customerSecond.firstname" required pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$" oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoCusSecond1"></div>       
+              <label><b>นามสกุล : </b></label><input id="infoCusSecond2"type="text" v-model="selectedCus.customerSecond.lastname" required pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$" oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoCusSecond2"></div>   
+              <label><b>เบอร์ : </b></label>
+              <input id="infoCusSecond3"type="tel" maxlength="10"  v-model="selectedCus.customerSecond.tel" required pattern="^[0]{1}([689]{1})(\d{8})+$" oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข 10 หลัก')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoCusSecond3"></div>   
+              <label><b>เลขบัตรประจำตัวประชาชน : </b></label>
+              <input id="infoCusSecond4"type="text" maxlength="13" v-model="selectedCus.customerSecond.id" required pattern="^([\d]{13})+$" oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข 13 หลัก')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoCusSecond4"></div>   
+            </div>
+            <div class="modal-footer bt">
+              <button type="button" v-on:click="sentInformationSecondToJson('informationCustomerSecondForm')">บันทึก</button>
+              <button type="button" v-on:click="closeForm('informationCustomerSecondForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+      <!-- pop up request -->
+      <div id="requestForm" class="modal" >
+        <div class="modal-content"style="max-width: 500px;">
+          <div class="modal-header">
+              <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+          </div>
+          <div class="modal-body">
+            <div v-if="selectedCus.request.annoy.building!==''">
+                <label><b>รบกวน :</b></label>
+                  <p>{{selectedCus.request.annoy.building}} {{selectedCus.request.annoy.room}} : {{selectedCus.request.annoy.message}}</p>
+              </div>
+              <hr>
+              <div v-if="selectedCus.request.repair.electricity==true || selectedCus.request.repair.water==true || selectedCus.request.repair.airConditioner==true || selectedCus.request.repair.door==true || selectedCus.request.repair.other!==''">
+                <label><b>ซ่อม :</b></label>
+                <tr>
+                  <span v-if="selectedCus.request.repair.electricity==true"><td>ไฟ</td></span>
+                  <!-- <td v-else></td> -->
+                  <span v-if="selectedCus.request.repair.water==true"><td >น้ำ </td></span> 
+                  <span v-if="selectedCus.request.repair.airConditioner==true"><td >แอร์ </td></span>
+                  <span v-if="selectedCus.request.repair.door==true"> <td>ประตู/หน้าต่าง </td></span> 
+                 <span v-if="selectedCus.request.repair.other!==''"> <td >{{selectedCus.request.repair.other}} </td></span>
+                </tr>
+              </div>
+              <hr>
+              <div v-if="selectedCus.request.clean.bedroom==true || selectedCus.request.clean.toilet==true || selectedCus.request.clean.other==true">
+                <label><b>ทำความสะอาด :</b></label>
+                <tr>
+                  <span v-if="selectedCus.request.clean.bedroom==true"> <td >ห้องนอน </td></span>
+                  <span v-if="selectedCus.request.clean.toilet==true"><td >ห้องน้ำ </td></span>
+                  <span v-if="selectedCus.request.clean.airConditioner==true"> <td>แอร์ </td></span>
+                </tr>
+             </div>
+          </div>
+          <div class="modal-footer bt">
+            <button type="button" v-on:click="closeForm('requestForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+      <!-- pop up ค่าหอ -->
+      <div id="rentForm" class="modal" >
+        <div class="modal-content" style="max-width: 500px;">
+          <div class="modal-header">
+              <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+          </div>
+          <div class="modal-body">
+              <label><b>ค่าห้อง : </b></label>
+              <input id="infoRent1" type="number" v-model="selectedCus.rent.rates" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoRent1"></div>    
+              <label><b>ค่าไฟ(หน่วย) :  </b></label><br>
+              <input id="infoRent2_1" style="width:45%" type="number" v-on:keyup="checkLessThanElec" v-model="selectedCus.rent.elecStart" required  oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"> -
+              <input id="infoRent2_2" style="width:45%" type="number" v-on:keyup="checkLessThanElec" v-model="selectedCus.rent.elecEnd" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoRent2"></div>  
+              <label><b>ค่าน้ำ(หน่วย) :  </b></label><br>
+              <input id="infoRent3_1" style="width:45%" type="number" v-on:keyup="checkLessThanWater" v-model="selectedCus.rent.waterStart" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"> -
+              <input id="infoRent3_2" style="width:45%" type="number" v-on:keyup="checkLessThanWater"  v-model="selectedCus.rent.waterEnd" required oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoRent3"></div>  
+              <label><b>ค่าอื่นๆ : </b></label>
+              <input id="infoRent4" type="number" v-model="selectedCus.rent.otherBill" oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoRent4"></div>  
+          </div>
+          <div class="modal-footer bt">
+            <button type="button" v-on:click="sentRentToJson('rentForm')">บันทึก</button>
+            <button type="button" v-on:click="closeForm('rentForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+      <!-- pop up มีพัสดุ -->
+      <div id="haveObjForm" class="modal" >
+        <div class="modal-content"style="max-width: 500px;">
+          <div class="modal-header">
+              <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+          </div>
+          <div class="modal-body">
+              <label><b>รหัสพัสดุ :</b></label>
+              <input id="infoObj"type="text" maxlength="13" pattern="^([A-Za-z0-9]{13})+$" v-model='textData' required oninvalid="setCustomValidity('กรอกไม่ถูกรูปแบบ')" oninput="setCustomValidity('')"><br>
+              <div class="display_hidden"id="dp_infoObj"></div> 
+          </div>
+          <div class="modal-footer bt">
+            <button type="button" v-on:click="sentHaveObjToJson('haveObjForm')">บันทึก</button>
+            <button type="button" v-on:click="closeForm('haveObjForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+      <!-- pop up รับพัสดุ -->
+      <div id="receiveObjForm" class="modal" >
+          <div class="modal-content"style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+            </div>
+            <div class="modal-body">
+                <div v-if="selectedCus.obj.length==0"><h4>ไม่พบพัสดุ</h4></div>
+                <div v-else>
+                  <h4>พบพัสดุยังไม่ได้รับ {{selectedCus.obj.length}} ชิ้น</h4>
+                  <label><b>คุณต้องการยืนยันการรับของหรือไม่?</b></label>
+                </div>
+            </div>
+            <div class="modal-footer bt">
+              <button type="button" v-on:click="sentReceiveToJson('receiveObjForm')" v-if="selectedCus.obj.length!==0">ใช่</button>
+              <button type="button" v-on:click="closeForm('receiveObjForm')" v-if="selectedCus.obj.length!==0" >ไม่</button>
+              <button type="button" v-on:click="closeForm('receiveObjForm')" v-if="selectedCus.obj.length==0" >ปิด</button>
+            </div>
+          </div>
+        </div>
+      <!-- pop up ติดต่อ -->
+      <div id="connectForm" class="modal" >
+        <div class="modal-content"style="max-width: 500px;">
+          <div class="modal-header">
+              <h2>{{selectedCus.building}}{{selectedCus.room}}</h2>
+          </div>
+          <div class="modal-body"> <label><b>ติดต่อ : </b></label>
+            <textarea v-model="textData"placeholder="กรอกสิ่งที่ต้องการติดต่อ" required></textarea><br>
+          </div>
+          <div class="modal-footer bt">
+            <button type="button" v-on:click="sentConnectToJson('connectForm')">บันทึก</button>
+            <button type="button" v-on:click="closeForm('connectForm')">ปิด</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vue.js -->
+    <script src="admin.js" charset="utf-8"></script>
+  </body>
+</html>

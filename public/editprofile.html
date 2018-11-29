@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>edit profile</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <link rel="stylesheet" href="editprofile.css"
+  </head>
+  <body>
+  <div class="container" id="CustomerData">
+  <header>
+      <h1><img src="pic/logo.png"  class="center middle" ></h1>
+      <!-- style="width: 506px; height: :137px;" -->
+    </header>
+    <!-- <div class="profile"> -->
+            <tr>
+              <div class="customer">
+                <div class="headersection"><b>{{customer[0].priority}}</b></div>
+                <hr width="90%" size="3" color="#fff">
+
+                <p><b>ชื่อผู้เช่า : </b> {{customer[0].name}}</p>
+                <p><b>เลขประจำตัวประชาชน : </b> {{customer[0].id}}</p><br>
+
+                <p><b>เบอร์โทรศัพท์ : </b></p>
+                <input type="text" maxlength="10" id="phone1" pattern="^[0]{1}([689]{1})(\d{8})+$" required v-model="customer[0].phoneNumb"
+                oninvalid="setCustomValidity('กรอกตามรูปแบบ 06 หรือ 08 หรือ 09xxxxxxxx ')" 
+                oninput="setCustomValidity('')">
+                <div class="display_hidden" id="dp_phone1"></div>
+                <p><b>Line ID : </b></p>
+                <input type="text" id="line1" required v-model="customer[0].lineID" >
+                <!-- <div class="display_hidden" id="dp_lineID1"></div> -->
+                <p><b>Email Address : </b></p>
+                <input type="email" id="email1" required v-model="customer[0].email" oninvalid="setCustomValidity('กรอกตามรูปแบบของ email')" 
+                oninput="setCustomValidity('')">
+                <div class="display_hidden" id="dp_email1"></div>
+
+              </div>
+            </tr>
+
+            <tr>
+              <div class="customer">
+
+                <div class="headersection"><b>{{customer[1].priority}}</b></div>
+                <hr width="90%" size="3" color="#fff">
+
+                <p><b>ชื่อผู้เช่า : </b> {{customer[1].name}}</p>
+                <p><b>เลขประจำตัวประชาชน : </b> {{customer[1].id}}</p><br>
+                <p><b>เบอร์โทรศัพท์ : </b></p>
+                <input type="text" maxlength="10" id="phone2" pattern="^[0]{1}([689]{1})(\d{8})+$" required v-model="customer[1].phoneNumb"
+                oninvalid="setCustomValidity('กรอกตามรูปแบบ 06 หรือ 08 หรือ 09xxxxxxxx ')" 
+                oninput="setCustomValidity('')">
+                <div class="display_hidden" id="dp_phone2"></div>
+                <p><b>Line ID : </b></p>
+                <input type="text" id="line2" required v-model="customer[1].lineID">
+                <!-- <div class="display_hidden" id="dp_lineID2"></div> -->
+                <p><b>Email Address : </b></p>
+                <input type="email" id="email2" required v-model="customer[1].email" oninvalid="setCustomValidity('กรอกตามรูปแบบของ email')"
+                oninput="setCustomValidity('')">
+                <div class="display_hidden" id="dp_email2"></div>
+
+
+              </div>
+            </tr>
+    <!-- </div> -->
+      <div class="buttonsection bt">
+        <button class="button" v-on:click="saving" id="saving">บันทึก</button>
+        <button class="button" v-on:click="cancel" id="calcel">ยกเลิก</button>
+      </div>
+
+       <!-- The Modal -->
+       <div id="savingModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p><b> บันทึกข้อมูลแล้ว </b></p>
+          </div>
+        </div>
+
+    <!-- </div> -->
+     <!-- profile -->
+  <!-- </div> -->
+
+  <script src="editprofile.js" charset="utf-8"></script>
+  </body>
+</html>

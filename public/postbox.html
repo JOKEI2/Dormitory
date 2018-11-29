@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>postbox</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <link rel="stylesheet" href="postbox.css" />
+    <!-- Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- bootstrap -->
+    <!--
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+    <script src="path/to/vue.js"></script>
+    <script src="path/to/vue-strap-lang.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="vue-app">
+      <div class="container" id="CustomerData">
+        <header>
+          <div class="bt_a"><a href="login.html">log out</a></div>
+          <h1><img src="pic/logo.png" class="center middle" /></h1>
+        </header>
+        <ul class="sticky" id="nav-bar" style="display:flex; flex:1;">
+          <li style="flex:1; font-size:28pt;">
+            <a href="profile.html"> <p>ข้อมูล</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a href="washing.html"> <p>เครื่องซักผ้า</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a href="notify.html"> <p>แจ้ง</p> </a>
+          </li>
+
+          <li style="flex:1; font-size:28pt;">
+            <a class="active"> <p>พัสดุ</p> </a>
+          </li>
+          <li style="flex:1; font-size:28pt;">
+            <a href="water.html"> <p>สั่งซื้อน้ำดื่ม</p> </a>
+          </li>
+        </ul>
+        <div class="section">
+          <div id="top">
+            <h1>เช็คพัสดุ</h1>
+            <hr />
+            <div id="head_box"><label>หมายเลขพัสดุ</label></div>
+            <div id="box">
+              <input
+                type="text"
+                maxlength="1"
+                id="1"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('1','a')"
+                v-model="packageNo[0]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="a"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('a','b')"
+                v-on:keydown="moveOnMin('a','1')"
+                v-model="packageNo[1]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="b"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('b','c')"
+                v-on:keydown="moveOnMin('b','a')"
+                v-model="packageNo[2]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="c"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('c','d')"
+                v-on:keydown="moveOnMin('c','b')"
+                v-model="packageNo[3]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="d"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('d','e')"
+                v-on:keydown="moveOnMin('d','c')"
+                v-model="packageNo[4]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="e"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('e','f')"
+                v-on:keydown="moveOnMin('e','d')"
+                v-model="packageNo[5]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="f"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('f','g')"
+                v-on:keydown="moveOnMin('f','e')"
+                v-model="packageNo[6]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="g"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('g','h')"
+                v-on:keydown="moveOnMin('g','f')"
+                v-model="packageNo[7]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="h"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('h','i')"
+                v-on:keydown="moveOnMin('h','g')"
+                v-model="packageNo[8]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="i"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('i','j')"
+                v-on:keydown="moveOnMin('i','h')"
+                v-model="packageNo[9]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="j"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('j','k')"
+                v-on:keydown="moveOnMin('j','i')"
+                v-model="packageNo[10]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="k"
+                pattern="[a-zA-Z0-9]"
+                v-on:keyup="moveOnMax('k','l')"
+                v-on:keydown="moveOnMin('k','j')"
+                v-model="packageNo[11]"
+              />
+              <input
+                type="text"
+                maxlength="1"
+                id="l"
+                pattern="[a-zA-Z0-9]"
+                v-on:keydown="moveOnMin('l','k')"
+                v-model="packageNo[12]"
+              />
+              <div class="bt_second">
+                <button type="button" v-on:click="clear">ล้าง</button>
+              </div>
+            </div>
+            <hr style="border: 1px solid #ee999e; border-style: dotted;" />
+            <div class="bt">
+              <button type="button" v-on:click="openform">ค้นหา</button>
+            </div>
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                  <div v-if="checkObj()==true">
+                      <p><b>พบพัสดุนี้</b></p>
+                      <p>หมายเลขพัสดุ : {{isObjSelected}}</p>
+                      <p>มาส่งวันที่ : {{isDateSelected}}</p>
+                  </div>
+                  <div v-else>
+                      <p><b>ไม่พบพัสดุนี้</b></p>
+                  </div>
+              </div>
+            </div>
+
+            <!-- The Modal -->
+            <div id="no" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <p><b>กรุณากรอกหมายเลขพัสดุให้ครบ</b></p>
+              </div>
+            </div>
+            <!-- The Modal -->
+            <div id="patternFalse" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <p><b>กรอกไม่ตรงรูปแบบ</b></p>
+              </div>
+            </div>
+          </div>
+          <div id="bottom">
+            <table class="fixed_header">
+              <thead>
+                <tr>
+                  <th><p>หมายเลขพัสดุ</p></th>
+                  <th><p>วันที่รับของ</p></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(n,key,index) in listpackageNo">
+                  <td>{{ n.No }}</td>
+                  <td>{{ n.date }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vue.js -->
+    <script src="postbox.js" charset="utf-8"></script>
+  </body>
+</html>

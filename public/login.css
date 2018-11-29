@@ -1,0 +1,133 @@
+/* Background */
+body{
+    background-image: url("pic/bg.png");
+  }
+  /* Font */
+  @font-face {
+    font-family: Nithan;
+    src: url(font/Nithan.ttf);
+  }
+  *{
+    font-family: Nithan;
+  }
+  .center {
+    display: block;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+    
+}
+.box{
+    display: block;
+    max-width: 600px;
+    max-height: 1000px;
+    margin-left: auto;
+    padding: 20px 50px;
+    margin-right: auto;
+    background: #F0DDDE;
+    border-radius: 15px;
+}
+* {box-sizing: border-box;}
+/* form{
+    max-width: 600px;
+    max-height: 1000px;
+} */
+/* Style the input container */
+.input-container {
+  display: flex;
+  /* width: 100%; */
+  max-width: 500px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 20px 30px;
+  background: #EE999E;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+  width: 100%;
+  font-size: 24px;
+  padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 2px solid dodgerblue;
+}
+.forgot {
+    text-align: right; 
+    margin-bottom:30px;
+    /* margin-right: 50px; */
+    
+  }
+.forgot a{
+    color: #777777;
+    font-size: 24px;
+}
+.forgot :hover{
+    color: #6B626E;
+}
+.bt{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .bt button {
+    margin: 0px 5px;
+    padding: 10px 150px;
+    background: #ee999e;
+    color: white;
+    font-family: Nithan;
+    font-size: 15pt;
+    font-weight: bold;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+  .bt :hover {
+    background: #da6970;
+  }
+  @media (max-width: 415px) {
+    .center {
+      max-width: 250px;
+      padding-top: 100px !important;
+    }
+    .box{
+        max-width: 280px;
+        max-height: 500px;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    .forgot a{
+        font-size: 18px;
+    }
+    .icon {
+        padding: 15px 20px;
+        background: #EE999E;
+        color: white;
+        min-width: 20px;
+      }
+      .input-field {
+        font-size: 18px;
+
+      }
+      .bt button {
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 40px;
+        cursor: pointer;
+        padding: 10px 40px;
+      }
+
+    
+  }

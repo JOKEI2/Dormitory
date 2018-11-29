@@ -1,0 +1,263 @@
+*{
+    margin:0 auto;
+    padding: 0;
+}
+body{
+    background-image: url("pic/bg.png"); 
+    font-family: Nithan;
+}
+  header{
+      text-align: center;
+      padding-top: 15px;
+  }
+
+
+.active {
+    background-color: grey;
+    display: flex;
+    flex: 1;
+    text-align: center;
+    /* padding: 30%; */
+    /* border: 1px solid white; */
+
+    /* padding-right: auto; */
+}
+ .customer{
+     width: 60%;
+     /* height: 260px;  */
+     margin-bottom: 30px;
+     margin-top: 20px;
+     padding-top: 10px;
+     padding-bottom: 20px;
+     /* text-align: right; */
+     /* margin-bottom: 0; */
+     background: #F7D1D3;
+}
+
+ .customer p{
+     text-align: left;
+     margin-left: 5%;
+     margin-bottom: 15px;
+    font-size: 16pt;
+    color: grey;   
+}
+
+.headersection{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16pt;
+    color: grey;   
+}
+
+.customer hr{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.customer p{
+    margin-bottom: 0;
+}
+
+.buttonsection{
+      width: 60%;
+      /* height: 50px;       */
+      text-align: center;
+      padding-bottom: 15px;
+      /* margin-bottom: 15px; */
+}
+
+input[type=text] {
+    width: 90%;
+    /* padding: px 5px; */
+    /* font-weight: normal; */
+    font-size: 14pt;
+    font-family: Nithan;
+    border:none;
+    height: 30px;
+    background-color:#f1f1f1; 
+    margin-left: 5%;
+    margin-bottom: 10px;
+    /* margin: 8px 0; */
+    /* border-radius: 4px; */
+}
+
+input[type=text]:focus {
+  background-color: #ddd;
+}
+
+input[type=email] {
+    width: 90%;
+    /* padding: px 5px; */
+    /* font-weight: normal; */
+    font-size: 14pt;
+    font-family: Nithan;
+    border:none;
+    height: 30px;
+    background-color:#f1f1f1; 
+    margin-left: 5%;
+    margin-bottom: 5px;
+    /* margin: 8px 0; */
+    /* border-radius: 4px; */
+}
+
+.display_hidden{
+    display: none;
+    font-size: 10pt;
+    margin-left:45px;
+    color: red;
+  }
+
+input[type=email]:focus {
+    background-color: #ddd;
+  }
+
+
+  
+.bt{
+    margin-bottom: 20px;
+}
+.bt button {
+  margin: 0px 5px;
+  padding: 5px 20px;
+  background: #ee999e;
+  color: white;
+  font-family: Nithan;
+  font-size: 15pt;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.bt_a {
+    font-family: Nithan;
+    font-size: 28px;
+    font-weight: bold;
+    z-index: 9;
+    float: right;
+    margin-right: 10px;
+    border: none;
+    position: absolute;
+    right: 0;
+  }
+.bt :hover {
+  background: #da6970;
+}
+
+.center {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+}
+
+body {font-family: Nithan, Helvetica, sans-serif;}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  font-family: Nithan;
+  font-size: 15pt;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-header {
+  padding: 2px 16px;
+  background-color: #ee999e;
+  color: white;
+}
+.modal-header h2 {
+  text-align: center;
+  font-weight: bold;
+}
+.modal-body {
+  padding: 2px 16px;
+  background-color: white;
+}
+
+.modal-footer {
+  text-align: center;
+  padding: 2px 16px;
+  /* background-color: #5cb85c; */
+  background-color: white;
+  color: white;
+}
+/* Modal Content */
+.modal-content {
+  /* font-size: 24px; */
+  text-align: center;
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* .modal-content p{
+    font-size: 24pt;
+} */
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (max-width: 415px){
+    .customer{
+        width: 90%;
+    }
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 0;
+      opacity: 1;
+    }
+  }
+    
+  /* Font */
+  @font-face {
+      font-family: Nithan;
+      src: url(font/Nithan.ttf);
+  }
+  

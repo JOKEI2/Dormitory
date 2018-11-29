@@ -1,0 +1,351 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+}
+body {
+  background-image: url("pic/bg.png");
+}
+/* Font */
+@font-face {
+  font-family: Nithan;
+  src: url(font/Nithan.ttf);
+}
+header {
+  /* width: 100%; */
+  /* height: 234px; */
+  text-align: center;
+  padding-top: 15px;
+}
+.bt_a a {
+  text-decoration: none;
+  color: #ee999e;
+  border: none;
+  /* z-index: 9; */
+}
+.bt_a {
+  font-family: Nithan;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 9;
+  float: right;
+  margin-right: 10px;
+  border: none;
+  position: absolute;
+  right: 0;
+}
+.bt_a :hover {
+  text-decoration: underline;
+  color: #da6970;
+  border: none;
+}
+
+ul {
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #efc8b0;
+  /* padding-top: 10px;
+        padding-bottom: 10px; */
+}
+
+.sticky {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+li {
+  float: left;
+}
+
+li a {
+  /* display: flex;
+        flex: 1; */
+  color: white;
+  text-align: center;
+  /* padding: 27px 110px; */
+  text-decoration: none;
+  /* padding-top: 10px;
+        padding-bottom: 10px; */
+}
+
+li a:hover {
+  background-color: #ee999e;
+  display: flex;
+  flex: 1;
+  text-align: center;
+  /* padding: 30%; */
+}
+.active {
+  background-color: grey;
+  display: flex;
+  flex: 1;
+  /* padding: 30%; */
+  /* border: 1px solid white; */
+
+  /* padding-right: auto; */
+}
+
+.container {
+  font-family: Nithan;
+  padding-bottom: 50px;
+}
+
+.center {
+  display: block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 60px;
+}
+#top {
+  display: block;
+  margin-left: auto;
+  width: 90%;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  /* padding: 20px; */
+  border: 3px solid #ee999e;
+  background: white;
+}
+#top h1 {
+  margin-top: 20px;
+}
+#top hr {
+  margin: 20px;
+  border: 2px solid #ee999e;
+  font-family: Nithan;
+}
+#top label {
+  font-weight: bold;
+  padding-bottom: 10px;
+  font-size: 25px;
+  color: white;
+}
+
+#head_box {
+  margin: 0px 20px;
+  margin-bottom: 20px;
+  padding: 10px 0px;
+  font-family: Nithan;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ee999e;
+  border-radius: 10px;
+}
+#box input[type="text"] {
+  font-family: Nithan;
+  font-size: 20px;
+  border: 2px solid #ee999e;
+  text-align: center;
+  padding: 5px 5px;
+  margin: 0px 10px 10px 10px;
+  width: 30px;
+  height: 30px;
+  background: #f1f1f1;
+}
+#box input[type="text"]:hover,
+#box input[type="text"]:focus {
+  background: #ddd;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  font-size: 24px;
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.bt button,
+.bt_second button {
+  margin: 0px 5px;
+
+  padding: 5px 20px;
+  color: white;
+  font-family: Nithan;
+  font-size: 15pt;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.bt button {
+  margin-bottom: 30px;
+  background: #ee999e;
+}
+.bt_second button {
+  background: #e8b7ba;
+}
+.bt :hover {
+  background: #da6970;
+}
+.bt_second :hover {
+  background: #e29da1;
+}
+#bottom {
+  width: 90%;
+}
+/* Table */
+.fixed_header {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.fixed_header tbody {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+}
+
+.fixed_header thead tr,
+.fixed_header tbody tr {
+  display: flex;
+  flex: 1;
+}
+tr:nth-child(odd) {
+  background-color: white;
+}
+tr:nth-child(even) {
+  background-color: #f0ddde;
+}
+
+.fixed_header th {
+  background-color: #ee999e;
+  color: white;
+}
+
+.fixed_header th,
+.fixed_header td {
+  flex: 1;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
+}
+.fixed_header th {
+  font-family: Nithan;
+  font-size: 15pt;
+}
+.fixed_header td,
+td select {
+  font-family: Nithan;
+  font-size: 14pt;
+}
+@media (max-width: 415px) {
+  .center {
+    height: 40px;
+  }
+  .bt_a {
+    font-size: 20px;
+  }
+  .sticky a {
+    font-size: 22px;
+  }
+  #top h1 {
+    font-size: 22px;
+  }
+  #top{
+    margin-top: 0px;
+  }
+  #head_box label {
+    font-size: 20px;
+  }
+  #head_box {
+    padding: 5px 0px;
+    margin: 10px 5px;
+  }
+  #box input[type="text"] {
+    font-size: 13px;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    width: 18px;
+    height: 25px;
+  }
+  .bt button{
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .bt{
+    margin-top: 5px;
+    padding-bottom: 5px;
+  }
+  .bt_second button{
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .bt_second {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  #top hr{
+    margin: 5px 5px 5px 5px;
+  }
+  .fixed_header tr th,.fixed_header tr td{
+    font-size: 16px;
+  }
+  #top{
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+  }
+
+}

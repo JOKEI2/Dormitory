@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dormitory-Staff</title>
+  <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+  <link rel="stylesheet" href="staff2.css">
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <!-- Vue.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body onload="startTime()">
+  <div id="vue-app">
+    <div class="bt_a"><a href="login.html">log out</a></div>
+    <div id="allTable">
+      <div id="center">
+        <h1>ตารางงานรายวัน</h1>
+        <h2>วันที่ : <span><input type="date" v-on:keyup="check(dateSelected)" v-model="dateSelected"> </span><span id="btSearch"><button  type="button" v-on:click="sentDate()">ค้น</button></span> </h2>
+         <h2> <span><div id="time"></div></span></h2>
+      </div>
+      <div id="left">
+        <h2>ตารางทำความสะอาด</h2>
+        <table class="fixed_header">
+          <thead>
+            <tr>
+              <th>เวลา</th>
+              <th>อาคาร</th>
+              <th>ห้อง</th>
+              <th>ห้องนอน</th>
+              <th>ห้องน้ำ</th>
+              <th>แอร์</th>
+            </tr>
+          </thead>
+          <tbody id="fix_head1">
+            <tr v-for="(c,key,index) in schedule.timelineClean" v-if="c.time>timeCurrent&&isOpenSchedule==true&&isCheck==true">
+              <td>{{c.time}}</td>
+              <td>{{c.building}}</td>
+              <td>{{c.room}}</td>
+              <td v-if="c.bedroom==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="c.toilet==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="c.airConditioner==true">&#10003;</td>
+              <td v-else></td>
+            </tr>
+            <tr v-for="(c,key,index) in schedule.timelineClean" v-if="isOpenSchedule==false&&isCheck==true">
+                <td>{{c.time}}</td>
+                <td>{{c.building}}</td>
+                <td>{{c.room}}</td>
+                <td v-if="c.bedroom==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="c.toilet==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="c.airConditioner==true">&#10003;</td>
+                <td v-else></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="right">
+        <h2>ตารางซ่อม</h2>
+        <table class="fixed_header">
+          <thead>
+            <tr>
+              <th>เวลา</th>
+              <th>อาคาร</th>
+              <th>ห้อง</th>
+              <th>ไฟ</th>
+              <th>น้ำ</th>
+              <th>แอร์</th>
+              <th>ประตู/หน้าต่าง</th>
+              <th>อื่นๆ</th>
+            </tr>
+          </thead>
+          <tbody id="fix_head2">
+            <tr v-for="(r,key,index) in schedule.timelineRepair" v-if="r.time>timeCurrent&&isOpenSchedule==true&&isCheck==true">
+              <td>{{r.time}}</td>
+              <td>{{r.building}}</td>
+              <td>{{r.room}}</td>
+              <td v-if="r.electricity==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="r.water==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="r.airConditioner==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="r.door==true">&#10003;</td>
+              <td v-else></td>
+              <td v-if="r.other!==''">{{r.other}}</td>
+              <td v-else></td>
+            </tr>
+            <tr v-for="(r,key,index) in schedule.timelineRepair" v-if="isOpenSchedule==false&&isCheck==true">
+                <td>{{r.time}}</td>
+                <td>{{r.building}}</td>
+                <td>{{r.room}}</td>
+                <td v-if="r.electricity==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="r.water==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="r.airConditioner==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="r.door==true">&#10003;</td>
+                <td v-else></td>
+                <td v-if="r.other!==''">{{r.other}}</td>
+                <td v-else></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="bottom">
+        <div id="inBottom">
+          <button type="button" v-on:click="nextSetDateAndTime">กำหนดวันและเวลา</button>
+          <button type="button" v-on:click="nextSentDrinkingWater">ตารางส่งน้ำ</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Vue.js -->
+  <script src="staff2.js" charset="utf-8"></script>
+</body>
+
+</html>

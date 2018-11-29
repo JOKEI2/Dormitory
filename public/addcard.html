@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="addcard.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<style>
+
+body{
+    background-image: url("background.png");
+}
+
+
+
+</style>
+
+
+
+<body>
+
+    <div id="sc-password" style="margin-top:130px">
+        
+        <div class="sc-container" style="background-color: #F0DDDE;">
+          <p>กรุณากรอกรายละเอียดสำหรับชำระค่าเช่า</p>
+          <hr>
+          <input type="password" class="form-control" id="inputATM" placeholder="หมายเลขบัตร ATM" name="ATM"
+            maxlength="25" style="width:80%; border: 5px solid #F0DDDE;
+            border-radius: 18px 18px 18px 18px;">
+          <input type="password" class="form-control" id="inputCVV" placeholder="CVV" name="CVV"
+            maxlength="3" style="width:80%; border: 5px solid #F0DDDE;
+            border-radius: 18px 18px 18px 18px;">
+        <input type="password" class="form-control" id="inputDeadcard" placeholder="วันหมดอายุ" name="Deadcard"
+            maxlength="25" style="width:80%; border: 5px solid #F0DDDE;
+            border-radius: 18px 18px 18px 18px;">
+          <input type="submit" value="ยืนยัน"  onclick="login()">
+        </div>
+    </div>
+
+    <script>
+            function myFunction() {
+                document.getElementById("inputATM").submit();
+                document.getElementById("inputCVV").submit();
+                document.getElementById("inputDeadcard").submit();
+            }
+    
+            function login() {
+                axios.post('http://localhost:8081/login', { ATM: inputATM.value, CVV: inputCVV.value, Deadcard: inputDeadcard.value }).then(res=>{
+                    console.log(res.data)
+                })
+            }
+        </script>
+
+</body>
+</html>

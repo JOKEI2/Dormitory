@@ -1,0 +1,181 @@
+/* Background */
+body{
+  background-image: url("pic/bg.png");
+}
+/* Font */
+@font-face {
+    font-family: Nithan;
+    src: url(font/Nithan.ttf);
+}
+.bt_a a{
+  text-decoration: none;
+  color:#EE999E;
+  border: none;
+  /* z-index: 9; */
+}
+.bt_a{
+  font-family: Nithan;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 9;
+  float: right;
+  margin-right: 10px;
+  border: none;
+}
+.bt_a :hover{
+  text-decoration: underline;
+  color:#DA6970;
+  border: none;
+}
+/* Head */
+#allTable{
+  display: block;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  scroll-behavior: smooth;
+}
+#center h1,#center h2{
+  text-align: center;
+  font-family: Nithan;
+  font-weight: bold;
+  color: #DA6970;
+  padding-bottom: 10px;
+}
+/* Full-width input fields */
+#center h2 input[type=date]{
+  font-family: Nithan;
+  font-weight: bold;
+  color: #DA6970;
+  padding: 5px;
+  border: none;
+  background: #f1f1f1;
+}
+/* When the inputs get focus, do something */
+#center h2 input[type=date]:focus{
+  background-color: #ddd;
+  outline: none;
+}
+/* Full-width input fields */
+/* #center h2 input[type=time]{
+  font-family: Nithan;
+  font-weight: bold;
+  color: #DA6970;
+  padding: 5px;
+  border: none;
+  background: #f1f1f1;
+} */
+/* When the inputs get focus, do something */
+/* #center h2 input[type=time]:focus{
+  background-color: #ddd;
+  outline: none;
+} */
+/* #btSearch{
+  width: 100px;
+} */
+#btSearch button{
+  margin-left: 15px;
+  padding: 0px 30px;
+  background: #EE999E;
+  color: white;
+  font-family: Nithan;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+#btSearch :hover{
+  background: #DA6970;
+}
+#center{
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#left>h2,#right>h2{
+  text-align: center;
+  font-family: Nithan;
+  font-weight: bold;
+  color: #DA6970;
+}
+#left{
+  display: block;
+  float: left;
+  width: 40%;
+  /* border: 1px solid #6B626E; */
+  margin-right: 5px;
+}
+#right{
+  display: block;
+  float: right;
+  width: 55%;
+  margin-left: 5px;
+  /* border: 1px solid #F0DDDE; */
+}
+#bottom{
+  display: block;
+  width: 100%;
+  height: 30px;
+  /* border: 1px solid black; */
+  float: right;
+  margin-top: 10px;
+}
+#inBottom{
+  display: block;
+  float: right;
+}
+#inBottom button{
+  margin-left: 15px;
+  padding: 0px 30px;
+  background: #EE999E;
+  color: white;
+  font-family: Nithan;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+#inBottom :hover{
+  background: #DA6970;
+}
+/* Table */
+.fixed_header{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+}
+
+.fixed_header thead tr ,.fixed_header tbody tr{
+   display: flex;
+   flex: 1;
+}
+
+tr:nth-child(odd){background-color: white}
+tr:nth-child(even){background-color: #F0DDDE}
+
+.fixed_header th{
+  background-color: #EE999E;
+  color: white;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: center;
+  width: 200px;
+}
+.fixed_header th{
+  font-family: Nithan;
+  font-size: 16pt;
+}
+.fixed_header td{
+  font-family: Nithan;
+  font-size: 15pt;
+}

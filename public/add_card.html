@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>add card</title>
+    <link type="image/png" href="pic/icon.png" rel="shortcut icon" />
+    <link href="add_card.css" rel="stylesheet" type="text/css" />
+    <!-- Vue.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="vue-app">
+      <div id="sc-password">
+        <div class="sc-container">
+          <h1><b>กรุณากรอกรายละเอียดสำหรับชำระค่าเช่า</b></h1>
+          <hr />
+          <input
+            type="text"
+            class="form-control"
+            id="inputATM"
+            placeholder="หมายเลขบัตร ATM"
+            name="ATM"
+            v-model="ATM"
+            maxlength="16"
+            pattern="^(\d{16})+$"
+            oninvalid="setCustomValidity('กรอกเฉพาะเลข 16 หลัก')" 
+            oninput="setCustomValidity('')"
+            required
+          />
+          <div class="display_hidden"id="dp_ATM"></div>  
+          <input
+            type="text"
+            class="form-control"
+            id="inputName"
+            placeholder="ชื่อ"
+            v-model="name"
+            pattern="^([A-Za-z]|[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝูฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ])+$" 
+            oninvalid="setCustomValidity('กรอกเฉพาะตัวอักษร')"
+            oninput="setCustomValidity('')"
+            required
+          />
+          <div class="display_hidden"id="dp_Name"></div>   
+           
+          <input
+            type="text"
+            class="form-control"
+            id="inputCVV"
+            placeholder="CVV"
+            name="CVV"
+            maxlength="3"
+            pattern="^(\d{3})+$"
+            oninvalid="setCustomValidity('กรอกเฉพาะตัวเลข 3 หลัก')" 
+            oninput="setCustomValidity('')"
+            required
+          />
+          
+          <div class="display_hidden"id="dp_CVV"></div>   
+          <input
+            type="date"
+            class="form-control"
+            id="inputDeadcard"
+            placeholder="วันหมดอายุ"
+            name="Deadcard"
+            v-model="dateSeleted"
+            v-on:keyup="check(dateSeleted)"
+            required
+          />
+          <div class="display_hidden"id="dp_date"></div>   
+          <input type="submit" value="ยืนยัน" v-on:click="login()" />
+        </div>
+      </div>
+    </div>
+    <!-- Vue.js -->
+    <script src="add_card.js" charset="utf-8"></script>
+  </body>
+</html>

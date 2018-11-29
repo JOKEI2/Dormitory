@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>profile</title>
+  <link type="image/png" href="pic/icon.png" rel="shortcut icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+  <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+  <div class="container" id="CustomerData">
+    <header>
+        <div class="bt_a"><a href="login.html">log out</a></div>
+      <h1><img src="pic/logo.png" class="center middle"></h1>
+      <!-- style="width: 506px; height: :137px;" -->
+    </header>
+    <!-- <nav> -->
+    <ul class="sticky" style="display:flex; flex:1;">
+      <li style="flex:1; font-size:28pt;"><a class="active" href="#Info"><p>ข้อมูล</p></a></li>
+      <li style="flex:1; font-size:28pt;"><a href="washing.html"><p>เครื่องซักผ้า</p></a></li>
+      <li style="flex:1; font-size:28pt;"><a href="notify.html"><p>แจ้ง</p></a></li>
+      <li style="flex:1; font-size:28pt;"><a href="postbox.html"><p>พัสดุ</p></a></li>
+      <li style="flex:1; font-size:28pt;"><a href="water.html"><p>สั่งซื้อน้ำดื่ม</p></a></li>
+    </ul>
+    <!-- </nav> -->
+    <div class="section">
+      <div class="profile">
+        <tr>
+          <div class="headersection">
+              <p><font color="#EE999E" style="font-weight: bold;">ตึก {{building}} ห้อง {{roomNumb}}</font></p>
+              <p><font color="red" style="font-weight: bold;" v-if="current.payment === false">สถานะปัจจุบัน : ค้างชำระ</font></p>
+              <p><font color="111" style="font-weight: bold;" v-if="current.payment === true">สถานะปัจจุบัน : ชำระแล้ว</font></p>
+          </div> <!--  headersection -->
+        </tr>
+        <div v-for="ctm in customer">
+          <tr>
+            <div class="customer">
+              <span><b>{{ctm.priority}}</b></span>
+              <hr width="90%" size="3" color="#fff">
+              <p><b>ชื่อผู้เช่า : </b>{{ctm.name}}</p>
+              <p><b>เลขประจำตัวประชาชน : </b>{{ctm.id}}</p>
+              <p><b>เบอร์โทรศัพท์ : </b>{{ctm.phoneNumb}}</p>
+              <p><b>Line ID : </b>{{ctm.lineID}}</p>
+              <p><b>Email Address : </b>{{ctm.email}}</p>
+            </div>
+          </tr>
+        </div> <!-- v-for -->
+        <div class="buttonsectionAcct bt"><button class="button" v-on:click="editprofile">แก้ไข</button></div>
+      </div> <!-- profile -->
+
+      <div class="account">
+        <div class="headersection">
+          <p style="font-weight: bold;">ข้อมูลการเงิน</p>
+          <hr width="100%" size="3" color="#E9AC87">
+        </div>
+        <div class="bodysection">
+          <p><b>ชื่อบัญชี : </b>{{account}}</p>
+          <p><b>หมายเลขบัญชี : </b>{{accountID}}</p>
+        </div>
+        <div class="buttonsectionAcct bt"><button class="button" v-on:click="editAcct">แก้ไข</button></div>
+      </div> <!-- account -->
+
+      <div class="rentandcost">
+        <div class="headersection">
+          <p style="font-weight: bold;">ค่าใช้จ่ายเดือนปัจจุบัน</p>
+          <hr width="100%" size="3" color="#E9AC87">
+        </div>
+        <div class="bodysection">
+          <table>
+            <th>มิเตอร์น้ำ</th>
+            <th>ค่าน้ำ</th>
+            <th>มิเตอร์ไฟ</th>
+            <th>ค่าไฟ</th>
+            <th>ค่าเช่า</th>
+            <th>ค่าใช้จ่ายอื่นๆ</th>
+            <th>รวม</th>
+            <tr>
+              <td>{{current.waterStart}} - {{current.waterEnd}}</td>
+              <td>{{waterBill(current.waterEnd,current.waterStart)}}</td>
+              <td>{{current.elecStart}} - {{current.elecEnd}}</td>
+              <td>{{elecBill(current.elecEnd,current.elecStart)}}</td>
+              <td>{{current.rates}}</td>
+              <td>{{current.other}}</td>
+              <td>{{compute(current.waterEnd,current.waterStart,current.elecEnd,current.elecStart,current.other,current.rates)}}</td>
+            </tr>
+          </table>
+        </div>
+      </div><!-- rentandcost -->
+
+      <div class="historyData">
+        <div class="headersection">
+          <p style="font-weight: bold;">ข้อมูลค่าเช่าย้อนหลัง</p>
+          <hr width="100%" size="3" color="#E9AC87">
+        </div> <!-- headersection -->
+        <div class="tablesection">
+          <table>
+            <th>เดือน</th>
+            <th>มิเตอร์น้ำ</th>
+            <th>ค่าน้ำ</th>
+            <th>มิเตอร์ไฟฟ้า</th>
+            <th>ค่าไฟฟ้า</th>
+            <th>รวม</th>
+            <tr v-for="cost in history">
+              <td>{{cost.month}}</td>
+              <td>{{cost.waterStart}} - {{cost.waterEnd}}</td>
+              <td>{{waterBill(cost.waterEnd,cost.waterStart)}}</td>
+              <td>{{cost.elecStart}} - {{cost.elecEnd}}</td>
+              <td>{{elecBill(cost.elecEnd,cost.elecStart)}}</td>
+              <td>{{cost.total}}</td>
+            </tr>
+          </table>
+        </div> <!-- tablesection -->
+      </div> <!-- historydata -->
+
+    </div><!-- section -->
+  </div> <!-- container -->
+  <script src="profile.js" charset="utf-8"></script>
+</body>
+
+</html>
