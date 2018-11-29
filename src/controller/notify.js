@@ -38,7 +38,7 @@ const editData = (req, res) => {
     })
 }
 
-const repairData = (req, res) => {
+const repairDATA = (req, res) => {
     console.log(req.body);
     // res.send(req.body);
     const {building, room, repair} = req.body
