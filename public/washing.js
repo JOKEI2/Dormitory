@@ -61,11 +61,11 @@ new Vue({
       // axios.post('/yay', myObj).then(res => {
           
       //   console.log(res.data)
-        this.dataSetList=res.data.data
-        setTimeout(() => {
-          this.changeDataList()
-          console.log("open");
-        }, 100);
+      //   this.dataSetList=res.data.data
+      //   setTimeout(() => {
+      //     this.changeDataList()
+      //     console.log("open");
+      //   }, 100);
       // });
     },
     changeDataList:function(){
@@ -87,7 +87,7 @@ new Vue({
       // axios.post('/yay', myObj).then(res => {
           
       //   console.log(res.data)
-        this.dataSet=res.data.data
+        // this.dataSet=res.data.data
         setTimeout(() => {
           this.queue[key].pin=this.dataSet.pin
           this.queue[key].startCanEnter=this.dataSet.startCanEnter
