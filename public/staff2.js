@@ -826,9 +826,10 @@ new Vue({
     this.dateSelected = yyyy + "-" + mm + "-" + dd;
     setInterval(() => {
       // this.timeC.substring(7,12)=this.timeCurrent
-      this.timeCurrent = document
-        .getElementById("time")
-        .innerHTML.substring(7, 12);
+      var t = document
+        .getElementById("txt")
+        .innerHTML.split(':');
+      this.timeCurrent=t[0]+":"+t[1]
       console.log(this.timeCurrent);
     }, 100);
 

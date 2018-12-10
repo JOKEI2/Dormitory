@@ -9,12 +9,12 @@ const TMP={
 new Vue({
   el: "#vue-app",
   data: {
-    building: ["A", "B", "C"],
+    building: ["A"],
     buildingSelected: "",
     queue: [
       { No: 1, time: "21:21", status: false, pin: "1236" ,bookTime: "22:00",startCanEnter:"22.10",endCanEnter:"5:14"},
-      { No: 2, time: "22.05", status: false, pin: "8125" ,bookTime: "00:00"},
-      { No: 3, time: "21.29", status: false, pin: "5565" ,bookTime: "00:00"}
+      // { No: 2, time: 1541653690916, status: false, pin: "8125" ,bookTime: "00:00"},
+      // { No: 3, time: 1541654062282, status: false, pin: "5565" ,bookTime: "00:00"}
     ],
     // selectedQueue:{ No: 0, time: 0 ,status:false},
     // selectedIndex:-1,
@@ -61,11 +61,11 @@ new Vue({
       // axios.post('/yay', myObj).then(res => {
           
       //   console.log(res.data)
-      //   this.dataSetList=res.data.data
-      //   setTimeout(() => {
-      //     this.changeDataList()
-      //     console.log("open");
-      //   }, 100);
+        // this.dataSetList=res.data.data
+        // setTimeout(() => {
+        //   this.changeDataList()
+        //   console.log("open");
+        // }, 100);
       // });
     },
     changeDataList:function(){
@@ -87,7 +87,7 @@ new Vue({
       // axios.post('/yay', myObj).then(res => {
           
       //   console.log(res.data)
-        // this.dataSet=res.data.data
+        this.dataSet=res.data.data
         setTimeout(() => {
           this.queue[key].pin=this.dataSet.pin
           this.queue[key].startCanEnter=this.dataSet.startCanEnter

@@ -1,7 +1,7 @@
 new Vue({
   el: "#vue-app",
   data: {
-    brand: ["crystal", "nestlepurelife", "Chang", "Singa", "Minere", "Thip"],
+    brand: ["คริสตัล", "เนสท์เล่", "ช้าง", "สิงห์", "มิเนเร่", "น้ำทิพย์"],
     brandSelected: "",
     amount: 0
   },
@@ -24,7 +24,7 @@ new Vue({
       // console.log(center);
     },
     openform: function() {
-  
+      if(this.amount>0 && this.brandSelected!==""){
         var modal = document.getElementById("myModal");
         modal.style.display = "block";
         console.log("open");
@@ -40,13 +40,23 @@ new Vue({
           }
           
         };
-      
+      }else{
+        var modal = document.getElementById("myModal1");
+        modal.style.display = "block";
+        console.log("open");
+        window.onclick = event => {
+          if (event.target == modal) {
+            console.log("close");        
+            modal.style.display = "none";
+          }
+        };
+      }
     },
     clear:function(){
-      this.brandSelected=""
       this.amount=0
     },
     sentToJson: function () {
+     
       var myObj = {
         brand: this.brandSelected,
         amount: this.amount
@@ -55,6 +65,7 @@ new Vue({
       axios.post('/api/notify/buywater/', myObj).then(res => {
         console.log(res.data);
       });
+      
     }
   },
   mounted() {
